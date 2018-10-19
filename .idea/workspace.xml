@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="59fa5740-6839-4417-9812-bd3082e906fa" name="Default" comment="" />
+    <list default="true" id="59fa5740-6839-4417-9812-bd3082e906fa" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/api.iml" afterPath="$PROJECT_DIR$/.idea/api.iml" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/app/Bootstrap.php" afterPath="$PROJECT_DIR$/app/Bootstrap.php" />
+      <change beforePath="$PROJECT_DIR$/app/configs/api.php" afterPath="$PROJECT_DIR$/app/configs/api.php" />
+      <change beforePath="$PROJECT_DIR$/app/configs/application.ini" afterPath="$PROJECT_DIR$/app/configs/application.ini" />
+      <change beforePath="$PROJECT_DIR$/app/configs/autoload.php" afterPath="$PROJECT_DIR$/app/configs/autoload.php" />
+      <change beforePath="$PROJECT_DIR$/app/configs/config.php" afterPath="$PROJECT_DIR$/app/configs/config.php" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/Error.php" afterPath="$PROJECT_DIR$/app/controllers/Error.php" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/Index.php" afterPath="$PROJECT_DIR$/app/controllers/Index.php" />
+      <change beforePath="$PROJECT_DIR$/app/core/BaseController.php" afterPath="$PROJECT_DIR$/app/core/BaseController.php" />
+      <change beforePath="$PROJECT_DIR$/app/core/BaseModel.php" afterPath="$PROJECT_DIR$/app/core/BaseModel.php" />
+      <change beforePath="$PROJECT_DIR$/app/core/Common.php" afterPath="$PROJECT_DIR$/app/core/Common.php" />
+      <change beforePath="$PROJECT_DIR$/app/helpers/funs.php" afterPath="$PROJECT_DIR$/app/helpers/funs.php" />
+      <change beforePath="$PROJECT_DIR$/app/library/Tools/Config.php" afterPath="$PROJECT_DIR$/app/library/Tools/Config.php" />
+      <change beforePath="$PROJECT_DIR$/app/library/Tools/Request.php" afterPath="$PROJECT_DIR$/app/library/Tools/Request.php" />
+      <change beforePath="$PROJECT_DIR$/app/library/TwigAdapter.php" afterPath="$PROJECT_DIR$/app/library/TwigAdapter.php" />
+      <change beforePath="$PROJECT_DIR$/app/library/helperCurl.php" afterPath="$PROJECT_DIR$/app/library/helperCurl.php" />
+      <change beforePath="$PROJECT_DIR$/app/library/helperReflection.php" afterPath="$PROJECT_DIR$/app/library/helperReflection.php" />
+      <change beforePath="$PROJECT_DIR$/app/library/helperRsa.php" afterPath="$PROJECT_DIR$/app/library/helperRsa.php" />
+      <change beforePath="$PROJECT_DIR$/app/library/readme.txt" afterPath="$PROJECT_DIR$/app/library/readme.txt" />
+      <change beforePath="$PROJECT_DIR$/app/models/Sample.php" afterPath="$PROJECT_DIR$/app/models/Sample.php" />
+      <change beforePath="$PROJECT_DIR$/app/modules/Api/controllers/User.php" afterPath="$PROJECT_DIR$/app/modules/Api/controllers/User.php" />
+      <change beforePath="$PROJECT_DIR$/app/modules/Api/models/User.php" afterPath="$PROJECT_DIR$/app/modules/Api/models/User.php" />
+      <change beforePath="$PROJECT_DIR$/app/modules/Api/services/User.php" afterPath="$PROJECT_DIR$/app/modules/Api/services/User.php" />
+      <change beforePath="$PROJECT_DIR$/app/plugins/Sample.php" afterPath="$PROJECT_DIR$/app/plugins/Sample.php" />
+      <change beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change beforePath="$PROJECT_DIR$/composer.phar" afterPath="$PROJECT_DIR$/composer.phar" />
+      <change beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change beforePath="$PROJECT_DIR$/static/views/error/error.phtml" afterPath="$PROJECT_DIR$/static/views/error/error.phtml" />
+      <change beforePath="$PROJECT_DIR$/static/views/index/index.html" afterPath="$PROJECT_DIR$/static/views/index/index.html" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -116,7 +150,7 @@
       <path value="D:\Tools\phpstorm_plugs_tixing\yaf_api_plugin" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="width" value="1366" />
     <option name="height" value="728" />
   </component>
@@ -217,15 +251,16 @@
       <option name="presentableId" value="Default" />
       <updated>1539671504643</updated>
       <workItem from="1539671506317" duration="45025000" />
-      <workItem from="1539842811735" duration="15493000" />
+      <workItem from="1539842811735" duration="15588000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60518000" />
+    <option name="totallyTimeSpent" value="60613000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1366" height="728" extended-state="0" />
+    <frame x="0" y="0" width="1366" height="728" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30169752" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
