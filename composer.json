@@ -1,0 +1,21 @@
+{
+  "require": {
+    "predis/predis": "^1.1",
+    "twig/twig": "^2.5",
+    "joshcam/mysqli-database-class": "^2.9"
+  },
+  "autoload": {
+    "files": [
+      "app/core/Common.php",
+      "app/configs/autoload.php"
+    ],
+    "psr-4": {
+    }
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
+  }
+}
