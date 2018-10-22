@@ -1,9 +1,9 @@
 <?php
 
 define('ENVIRONMENT', isset($_SERVER['HTTP_ENV']) ? $_SERVER['HTTP_ENV'] : 'product');
-define('APPLICATION_PATH', dirname(__FILE__));
-define('CONFIGPATH', APPLICATION_PATH . '/app/configs/application.ini');
-require_once APPLICATION_PATH . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
+define('APP_PATH', dirname(__FILE__));
+define('CONFIGPATH', APP_PATH . '/app/configs/config.ini');
+require_once APP_PATH . DIRECTORY_SEPARATOR . 'vendor/autoload.php';
 if (!defined('CONFIGPATH')) echo 'No configpath defined, please define configpath and try again.';
 
 switch (ENVIRONMENT) {

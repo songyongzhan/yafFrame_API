@@ -7,7 +7,7 @@
  * Email: songyongzhan@qianbao.com
  */
 
-class TwigAdapter implements Yaf_View_Interface {
+class Twig implements Yaf_View_Interface {
 
   /**
    * assigned vars

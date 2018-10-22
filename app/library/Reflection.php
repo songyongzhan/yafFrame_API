@@ -1,6 +1,6 @@
 <?php
 
-class helperReflection {
+class Reflection {
 
   public $class = NULL;
   private $_instance = NULL;

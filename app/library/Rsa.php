@@ -1,6 +1,6 @@
 <?php
 
-class helperRsa {
+class Rsa {
 
   private $_pubkey;
   private $_privkey;

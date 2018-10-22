@@ -1,6 +1,6 @@
 <?php
 
-class helperCurl {
+class Curl {
 
   const JSON_ARRAY = 1;
   const JSON_OBJECT = 0;

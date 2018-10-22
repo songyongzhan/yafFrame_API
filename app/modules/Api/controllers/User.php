@@ -13,6 +13,8 @@ class UserController extends BaseController {
 
   public function indexAction(){
 
+    getInstance();
+    exit;
     echo ' modules Api index 方法';
 
 

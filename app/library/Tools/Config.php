@@ -9,7 +9,6 @@
 
 class Tools_Config {
 
-
   /**
    * 获取配置文件配置
    * @param null $node
@@ -20,7 +19,7 @@ class Tools_Config {
     static $config;
     $nodeVal = '';
     if (!$config) {
-      $config = new Yaf_Config_Ini(APPLICATION_PATH . '/app/configs/application.ini', ini_get('yaf.environ'));
+      $config = new Yaf_Config_Ini(CONFIGPATH, ini_get('yaf.environ'));
     }
     if ($node !== NULL && !empty($node)) {
       if ($nodeVal = $config->get($node)) {
