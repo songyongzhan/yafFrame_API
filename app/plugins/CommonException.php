@@ -23,6 +23,7 @@ class CommonExceptionPlugin extends Yaf_Plugin_Abstract {
     set_exception_handler('_exception_handler');
     register_shutdown_function('_shutdown_handler');
 
+    //供 公共方法获取exceptions对象使用
     if (!Yaf_Registry::has('exceptions') && import(APP_PATH . DS . 'app/core/Exceptions.php'))
       Yaf_Registry::set('exceptions', new Exceptions());
 

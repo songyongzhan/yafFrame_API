@@ -7,10 +7,16 @@
  * Email: songyongzhan@qianbao.com
  */
 
-define('TEMPLATE_DIR', APP_PATH . '/static');
+define('TEMPLATE_DIR', APP_PATH . '/static/views');
 
 define('DS', DIRECTORY_SEPARATOR);
 define('APP_CONFIG_PATH', APP_PATH . DS . 'app/configs');
+
+
+define('API_SUCCESS', 200000);
+define('API_FAILURE', 999999);
+define('API_FAILURE_MSG', '系统错误请联系管理员!');
+define('FETCH_DUMMY', FALSE); //是否模拟数据
 
 
 /**

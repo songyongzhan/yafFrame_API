@@ -97,7 +97,7 @@ if (!function_exists('getInstance')) {
       else throw new Exceptions($file . ' file not exists', 500);
 
       $className = $controllerName . 'Controller';
-      $_instance = new $className(getRequest(), isCli() ? new Yaf_Response_Cli() : new Yaf_Response_Http(), Yaf_Registry::get('viewTemplate'));
+      $_instance = new $className(getRequest(), isCli() ? new Yaf_Response_Cli() : new Yaf_Response_Http(), Yaf_Registry::has('viewTemplate') ? Yaf_Registry::get('viewTemplate') : new Yaf_View_Simple(TEMPLATE_DIR));
     }
     return $_instance;
   }
@@ -297,6 +297,7 @@ if (!function_exists('set_status_header')) {
    * @return  void
    */
   function set_status_header($code = 200, $text = '') {
+
     if (isCli()) {
       return;
     }
@@ -415,6 +416,200 @@ if (!function_exists('_shutdown_handler')) {
     if (isset($last_error) &&
       ($last_error['type'] & (E_ERROR | E_PARSE | E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_COMPILE_WARNING))) {
       _error_handler($last_error['type'], $last_error['message'], $last_error['file'], $last_error['line']);
+    }
+  }
+}
+
+if (!function_exists('cutstr')) {
+  /**
+   * [cutstr 汉字切割]
+   * @param  [string] $string [需要切割的字符串]
+   * @param  [string] $length [显示的长度]
+   * @param  string $dot [切割后面显示的字符]
+   * @return [string]         [切割后的字符串]
+   */
+  function cutstr($string, $length, $dot = '...') {
+    if (strlen($string) <= $length) {
+      return $string;
+    }
+    $string = str_replace(array('&amp;', '&quot;', '&lt;', '&gt;'), array('&', '"', '<', '>'), $string);
+    $strcut = '';
+    $n = $tn = $noc = 0;
+    while ($n < strlen($string)) {
+      $t = ord($string[$n]);
+      if ($t == 9 || $t == 10 || (32 <= $t && $t <= 126)) {
+        $tn = 1;
+        $n++;
+        $noc++;
+      } elseif (194 <= $t && $t <= 223) {
+        $tn = 2;
+        $n += 2;
+        $noc += 2;
+      } elseif (224 <= $t && $t < 239) {
+        $tn = 3;
+        $n += 3;
+        $noc += 2;
+      } elseif (240 <= $t && $t <= 247) {
+        $tn = 4;
+        $n += 4;
+        $noc += 2;
+      } elseif (248 <= $t && $t <= 251) {
+        $tn = 5;
+        $n += 5;
+        $noc += 2;
+      } elseif ($t == 252 || $t == 253) {
+        $tn = 6;
+        $n += 6;
+        $noc += 2;
+      } else {
+        $n++;
+      }
+      if ($noc >= $length) {
+        break;
+      }
+    }
+    if ($noc > $length) {
+      $n -= $tn;
+    }
+    $strcut = substr($string, 0, $n);
+    $strcut = str_replace(array('&', '"', '<', '>'), array('&amp;', '&quot;', '&lt;', '&gt;'), $strcut);
+    return $strcut . $dot;
+  }
+}
+
+if (!function_exists('getPassedHours')) {
+  /**
+   * [getPassedHours 某时间戳到现在所经过的时间]
+   * @param  [int] $distence [时间戳]
+   * @return [string]           [秒/分钟/小时]
+   */
+  function getPassedHours($distence) {
+    $passed = "";
+    switch ($distence) {
+      case ($distence < 60):
+        {
+          $passed = $distence . "秒";
+          break;
+        }
+      case ($distence > 60 && $distence < 60 * 60):
+        {
+          $passed = intval($distence / 60) . "分钟";
+          break;
+        }
+      case ($distence > 60 * 60):
+        {
+          $passed = sprintf("%.1f", $distence / (60 * 60)) . "小时";
+          break;
+        }
+    }
+
+    return $passed;
+  }
+}
+
+
+if (!function_exists('wtrim')) {
+  /**
+   * 增加了全角转半角的trim
+   *
+   * @param  string $str 原字符串
+   * @return  string  $str    转换后的字符串
+   */
+  function wtrim($str) {
+    return trim(sbc2abc($str));
+  }
+}
+
+
+if (!function_exists('sbc2abc')) {
+  /**
+   * 全角转半角
+   *
+   * @param  string $str 原字符串
+   * @return  string  $str    转换后的字符串
+   */
+  function sbc2abc($str) {
+    $f = array('　', '０', '１', '２', '３', '４', '５', '６', '７', '８', '９', 'ａ', 'ｂ', 'ｃ', 'ｄ', 'ｅ', 'ｆ', 'ｇ', 'ｈ', 'ｉ', 'ｊ', 'ｋ', 'ｌ', 'ｍ', 'ｎ', 'ｏ', 'ｐ', 'ｑ', 'ｒ', 'ｓ', 'ｔ', 'ｕ', 'ｖ', 'ｗ', 'ｘ', 'ｙ', 'ｚ', 'Ａ', 'Ｂ', 'Ｃ', 'Ｄ', 'Ｅ', 'Ｆ', 'Ｇ', 'Ｈ', 'Ｉ', 'Ｊ', 'Ｋ', 'Ｌ', 'Ｍ', 'Ｎ', 'Ｏ', 'Ｐ', 'Ｑ', 'Ｒ', 'Ｓ', 'Ｔ', 'Ｕ', 'Ｖ', 'Ｗ', 'Ｘ', 'Ｙ', 'Ｚ', '．', '－', '＿', '＠');
+    $t = array(' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '.', '-', '_', '@');
+    $str = str_replace($f, $t, $str);
+    return $str;
+  }
+}
+
+
+/**
+ * 转换为 JSON 字符串
+ * @param mixed $data 数据
+ * @param boolen $forceObject 强制将索引或空数组转换为对象
+ * @return mixed
+ */
+function jsonencode($data, $forceObject = FALSE) {
+  $option = (PHP_VERSION >= '5.4.0' ? JSON_UNESCAPED_UNICODE : 0) | ($forceObject ? JSON_FORCE_OBJECT : 0);
+  $option = $option | (PHP_VERSION >= '5.5.0' ? JSON_PARTIAL_OUTPUT_ON_ERROR : 0);
+
+  return is_array($data) || $forceObject ? json_encode($data, $option) : $data;
+}
+
+function jsondecode($data, $forceObject = FALSE) {
+  $result = json_decode($data, !$forceObject, 512, JSON_BIGINT_AS_STRING);
+
+  if ($forceObject)
+    is_object($result) || $result = FALSE;
+  else
+    is_array($result) || $result = FALSE;
+
+  return $result;
+}
+
+/**
+ * 抛出异常 API异常
+ * @param string 出错提示
+ * @param string 异常对象名
+ * @throws Exception
+ */
+function showApiException($message = API_FAILURE_MSG, $code = API_FAILURE, $httpcode = 200, $exception = 'ApiException') {
+  throw new $exception($message, $code, $httpcode);
+}
+
+
+if (!function_exists('validate')) {
+  function validate($rules, $data, $msg = []) {
+    empty($rules) && show_error('Validation rule array cannot be empty.');
+    empty($data) && show_error('Validation data can not be empty.');
+    strlen(implode('', array_values($msg))) === 0 && $msg = [];
+    $validate = Validate::make($rules, $msg);
+    if ($validate->check($data)) {
+      return TRUE;
+    } else
+      return ['result' => FALSE, 'errMsg' => $validate->getError()];
+  }
+}
+
+if (!function_exists('array_change_value_case')) {
+  function array_change_value_case($input, $case = CASE_LOWER) {
+    $aRet = array();
+
+    if (!is_array($input)) {
+      return $aRet;
+    }
+
+    foreach ($input as $key => $value) {
+      if (is_array($value)) {
+        $aRet[$key] = array_change_value_case($value, $case);
+        continue;
+      }
+
+      $aRet[$key] = ($case == CASE_UPPER ? strtoupper($value) : strtolower($value));
+    }
+
+    return $aRet;
+  }
+}
+
+if (!function_exists('getClientIP')) {
+  function getClientIP() { //HTTP_X_FORWARDED_FOR
+    foreach (['HTTP_CLIENT_IP', 'HTTP_X_REAL_IP', 'REMOTE_ADDR'] as $value) {
+      if (!empty($_SERVER[$value])) return $_SERVER[$value];
     }
   }
 }

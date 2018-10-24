@@ -8,6 +8,20 @@
  */
 class IndexController extends BaseController {
 
+
+  public function detailAction(){
+
+
+    $this->assign('user','james');
+    $this->getView()->display('/index/detail.html');
+    //echo $this->_render('/index/detail.html');
+
+    new SampleModel();
+
+
+  }
+
+
   public function bbAction() {
 
     /*   debugMessage('debug 日志');
@@ -19,6 +33,7 @@ class IndexController extends BaseController {
     //return json_encode(['name'=>'james','age'=>'33']);
 
     echo json_encode(['name'=>'james','age'=>'33']);
+    return true;
     //$this->getResponse()->setBody('content', ['name' => 'james', 'age' => '33']);
 
 

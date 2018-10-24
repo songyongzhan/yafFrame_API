@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/core/CoreController.php" />
+    <file url="file://$PROJECT_DIR$/app/core/CoreModel.php" />
+    <file url="file://$PROJECT_DIR$/app/core/CoreService.php" />
+  </component>
+</project>

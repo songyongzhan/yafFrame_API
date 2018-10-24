@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+
+    </style>
+</head>
+<body>
+{{ include('/common/header.html') }}
+
+<div id="content">{% block content %}{% endblock %}</div>
+
+
+{{ include('/common/footer.html') }}
+</body>
+</html>

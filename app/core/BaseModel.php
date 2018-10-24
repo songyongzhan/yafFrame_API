@@ -7,27 +7,12 @@
  * Email: songyongzhan@qianbao.com
  */
 
-class BaseModel {
+class BaseModel extends CoreModel {
 
-  private $_db = NULL;
-
-  public final function __construct() {
-    $this->_db = Yaf_Registry::get('db');
-    $this->init();
-  }
-
-  /**
-   * 构造方法 PS：仿照构造方法
-   */
-  public function init() {
-
-  }
-
-
+  use TraitCommon;
 
   public function getdb() {
     return $this->_db;
   }
-
 
 }

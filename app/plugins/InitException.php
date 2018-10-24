@@ -23,11 +23,11 @@ class InitExceptionPlugin extends Yaf_Plugin_Abstract {
 
     set_exception_handler(function ($exception) use ($old_exception) {
 
-      P('=========InitException==========');
+   /*   P('=========InitException==========');
       var_dump($exception);
-      P('=========InitException==========');
+      P('=========InitException==========');*/
 
-      
+      //var_dump($exception);
       $old_exception && $old_exception($exception);
 
     });

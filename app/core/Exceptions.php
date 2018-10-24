@@ -13,7 +13,6 @@
  */
 class Exceptions extends Yaf_Exception {
 
-
   public function __construct($message = '', $code = 0, Throwable $previous = NULL) {
 
     $this->errorTemplatePath = ERROR_TEMPLATE_PATH;
@@ -25,8 +24,7 @@ class Exceptions extends Yaf_Exception {
 
   public function show_exception($exception, $template = NULL) {
     is_null($template) || $this->exceptionFileName = $template;
-
-    $filePath = str_replace(APP_PATH, '', $exception->getFile());
+    
     $message = $exception->getMessage();
     if (empty($message)) {
       $message = '(null)';
@@ -53,7 +51,6 @@ class Exceptions extends Yaf_Exception {
     is_null($file) && $file = $this->getFile();
     is_null($line) && $line = $this->getLine();
     debugMessage(sprintf('severity:%s 错误信息:%s in %s line %s', $severity, $message, $file, $line));
-
   }
 
   public function show_error($exception, $message, $template = NULL, $status_code = 500) {
@@ -76,5 +73,6 @@ class Exceptions extends Yaf_Exception {
     exit(9);
   }
 
-
 }
+
+

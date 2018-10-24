@@ -21,7 +21,7 @@ return [
     'CommonException' => 'CommonException', //公共exception
     'CommonLog' => 'CommonLog', //公共Log 日志
     'InitException' => 'InitException',
-    'Api' => 'Api',
+    'ApiDispatch' => 'ApiDispatch',
   ]
 
 

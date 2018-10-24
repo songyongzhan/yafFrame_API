@@ -23,6 +23,7 @@ switch (ENVIRONMENT) {
     exit(1); // EXIT_ERROR
 }
 
+
 //http://php.net/manual/zh/yaf-application.getconfig.php
 $application = new Yaf_Application(CONFIGPATH);
 

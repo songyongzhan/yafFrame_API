@@ -7,22 +7,36 @@
  * Email: songyongzhan@qianbao.com
  */
 
-class UserController extends BaseController {
+class UserController extends ApiBaseController {
+
+  public function bbAction(){
+    echo  'bb';
+    echo '123';
+  }
+
 
 
 
   public function indexAction(){
 
-    getInstance();
+
+    var_dump($this->UserService->name);
+
+
+   $data= $this->UserService->index('','','','');
+
+    P($data);
+
     exit;
-    echo ' modules Api index 方法';
+
+   /* echo ' modules Api index 方法';
 
 
     $db=Yaf_Registry::get('db');
     $data=$db->get('goods_category',10);
     P($data);
 
-    P($this->getResponse());
+    P($this->getResponse());*/
 
 
 //    $this->UserService->index();

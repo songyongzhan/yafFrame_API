@@ -319,8 +319,9 @@
 
         <div class="info">
             <div>
-                <h2>[0]&nbsp;<abbr>Exception</abbr> in <a class="toggle"
-                                                          title="<?php echo $exception->getFile() ?> line <?php echo $exception->getLine(); ?>"><?php echo $filePath; ?>
+                <h2>[0]&nbsp;<abbr>Exception</abbr> in
+                    <a class="toggle"
+                       title="<?php echo $exception->getFile() ?> line <?php echo $exception->getLine(); ?>"><?php echo isset($filePath) ? $filePath : ''; ?>
                         line <?php echo $exception->getLine(); ?></a></h2>
             </div>
             <div><h1>信息提醒：<?php echo $message; ?></h1></div>
@@ -330,27 +331,32 @@
         <h2>Call Stack</h2>
         <ol>
             <li>in <a class="toggle"
-                      title="<?php echo $exception->getFile() ?> line <?php echo $exception->getLine(); ?>"><?php echo $filePath; ?>
+                      title="<?php echo $exception->getFile() ?> line <?php echo $exception->getLine(); ?>"><?php echo isset($filePath) ? $filePath : ''; ?>
                     line <?php echo $exception->getLine(); ?></a></li>
           <?php
 
           foreach ($exception->getTrace() as $key => $value) {
 
+            $class = isset($value['class']) ? $value['class'] : '';
+            $type = isset($value['type']) ? $value['type'] : '';
+            $function = isset($value['function']) ? $value['function'] : '';
             if ($key == 0) {
               ?>
                 <li>
-                    at class <?php echo $value['class'] . $value['type'] . $value['function']; ?>
-                    in <a class="toggle"><?php echo $filePath; ?><?php if (isset($value['line'])) {
-                      echo 'line' . $value['line'];
-                    } ?> args: <?php var_export($value['args'], TRUE) ?></a>
+                    at class <?php echo $class . $type . $function; ?>
+                    in
+                    <a class="toggle"><?php echo isset($filePath) ? $filePath : ''; ?><?php if (isset($value['line'])) {
+                        echo 'line' . $value['line'];
+                      } ?> args: <?php echo isset($value['args']) ? serialize($value['args']) : '' ?></a>
                 </li>
               <?php
             } else {
               ?>
 
                 <li>
-                    at class <?php echo $value['class'] . $value['type'] . $value['function']; ?>
-                    in <a class="toggle"> <?php echo $value['file']; ?>
+                    at
+                    class <?php echo $class . $type . $function; ?>
+                    in <a class="toggle"> <?php echo isset($value['file']) ? $value['file'] : ''; ?>
                         args:<?php var_export($value['args'], TRUE) ?> </a>
                 </li>
 

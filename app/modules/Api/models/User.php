@@ -13,6 +13,12 @@ class UserModel extends BaseModel {
     return "User Model index";
   }
 
+  public function add(){
 
+  }
+
+  public function del(){
+
+  }
 
 }

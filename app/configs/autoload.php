@@ -6,7 +6,7 @@
  * Time: 14:11
  * Email: songyongzhan@qianbao.com
  */
-require_once APP_PATH.DIRECTORY_SEPARATOR.'app/configs/api.php';
+require_once APP_PATH . DIRECTORY_SEPARATOR . 'app/configs/api.php';
 /*foreach (glob(__DIR__ . '/*.php') as $file) {
   if ($file != __FILE__)
     require_once $file;
@@ -16,8 +16,15 @@ $autoload = [];
 $autoload['helper'] = array('funs');
 
 $autoload['_autoload'] = array(
+  'TraitCommon' => APP_PATH . '/app/core/TraitCommon.php',
+  'CoreController' => APP_PATH . '/app/core/CoreController.php',
+  'CoreModel' => APP_PATH . '/app/core/CoreModel.php',
+  'CoreService' => APP_PATH . '/app/core/CoreService.php',
   'BaseController' => APP_PATH . '/app/core/BaseController.php',
   'BaseModel' => APP_PATH . '/app/core/BaseModel.php',
+  'BaseService' => APP_PATH . '/app/core/BaseService.php',
+  'ProxyModel' => APP_PATH . '/app/core/ProxyModel.php',
+  'CoreBootstrap' => APP_PATH . '/app/core/CoreBootstrap.php',
 );
 
 spl_autoload_register(function ($class) use ($autoload) {
