@@ -21,14 +21,22 @@ class UserService extends BaseService {
    */
   public function index($user, $password, $type, $message) {
 
-    return $this->show(['ddddd']);
+
+    $data = $this->UserModel->index([
+      'user'=>$user,
+      'password'=>$password,
+      'type'=>$type,
+      'message'=>$message,
+    ]);
+
+    return $this->show($data);
 
   }
 
   /**
    * @param array $data 需要添加的数据
    */
-  public function add($data){
+  public function add($data) {
 
   }
 
@@ -37,9 +45,16 @@ class UserService extends BaseService {
    * @param int $id <require|integer>
    * @param $data
    */
-  public function edit($id,$data){
+  public function edit($id, $data) {
 
-    return $this->show(['age'=>14,'user'=>'bbb']);
+    return $this->show(['age' => 14, 'user' => 'bbb']);
+  }
+
+  public function bb($int) {
+    $data=$this->UserModel->queryBidList($int);
+
+    return $this->show($data);
+
   }
 
 

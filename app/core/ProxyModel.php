@@ -180,4 +180,10 @@ class ProxyModel {
     return $result;
   }
 
+  //返回当前对象
+  public function getInstance() {
+    return $this->_instance;
+  }
+
+
 }

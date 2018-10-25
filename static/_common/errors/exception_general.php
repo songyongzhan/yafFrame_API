@@ -321,7 +321,7 @@
             <div>
                 <h2>[0]&nbsp;<abbr>Exception</abbr> in
                     <a class="toggle"
-                       title="<?php echo $exception->getFile() ?> line <?php echo $exception->getLine(); ?>"><?php echo isset($filePath) ? $filePath : ''; ?>
+                       title="<?php echo $exception->getFile() ?> line <?php echo $exception->getLine(); ?>"><?php echo $exception->getFile(); ?>
                         line <?php echo $exception->getLine(); ?></a></h2>
             </div>
             <div><h1>信息提醒：<?php echo $message; ?></h1></div>

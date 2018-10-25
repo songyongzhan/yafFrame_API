@@ -11,12 +11,16 @@ class IndexController extends BaseController {
 
   public function detailAction(){
 
+   /* $model=new SampleModel();
+    $model->selectSample();*/
+    $this->SampleModel->selectSample();
 
     $this->assign('user','james');
     $this->getView()->display('/index/detail.html');
     //echo $this->_render('/index/detail.html');
 
-    new SampleModel();
+
+
 
 
   }

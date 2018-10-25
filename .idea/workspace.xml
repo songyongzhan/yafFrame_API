@@ -4,6 +4,7 @@
     <list default="true" id="59fa5740-6839-4417-9812-bd3082e906fa" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/api.iml" afterPath="$PROJECT_DIR$/.idea/api.iml" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
@@ -20,18 +21,32 @@
       <change beforePath="$PROJECT_DIR$/app/controllers/User.php" afterPath="$PROJECT_DIR$/app/controllers/User.php" />
       <change beforePath="$PROJECT_DIR$/app/core/BaseController.php" afterPath="$PROJECT_DIR$/app/core/BaseController.php" />
       <change beforePath="$PROJECT_DIR$/app/core/BaseModel.php" afterPath="$PROJECT_DIR$/app/core/BaseModel.php" />
+      <change beforePath="$PROJECT_DIR$/app/core/BaseService.php" afterPath="$PROJECT_DIR$/app/core/BaseService.php" />
       <change beforePath="$PROJECT_DIR$/app/core/Common.php" afterPath="$PROJECT_DIR$/app/core/Common.php" />
+      <change beforePath="$PROJECT_DIR$/app/core/CoreBootstrap.php" afterPath="$PROJECT_DIR$/app/core/CoreBootstrap.php" />
+      <change beforePath="$PROJECT_DIR$/app/core/CoreController.php" afterPath="$PROJECT_DIR$/app/core/CoreController.php" />
+      <change beforePath="$PROJECT_DIR$/app/core/CoreModel.php" afterPath="$PROJECT_DIR$/app/core/CoreModel.php" />
+      <change beforePath="$PROJECT_DIR$/app/core/CoreService.php" afterPath="$PROJECT_DIR$/app/core/CoreService.php" />
       <change beforePath="$PROJECT_DIR$/app/core/Exceptions.php" afterPath="$PROJECT_DIR$/app/core/Exceptions.php" />
       <change beforePath="$PROJECT_DIR$/app/core/Log.php" afterPath="$PROJECT_DIR$/app/core/Log.php" />
+      <change beforePath="$PROJECT_DIR$/app/core/ProxyModel.php" afterPath="$PROJECT_DIR$/app/core/ProxyModel.php" />
+      <change beforePath="$PROJECT_DIR$/app/core/TraitCommon.php" afterPath="$PROJECT_DIR$/app/core/TraitCommon.php" />
       <change beforePath="$PROJECT_DIR$/app/helpers/funs.php" afterPath="$PROJECT_DIR$/app/helpers/funs.php" />
+      <change beforePath="$PROJECT_DIR$/app/library/ApiException.php" afterPath="$PROJECT_DIR$/app/library/ApiException.php" />
+      <change beforePath="$PROJECT_DIR$/app/library/Curl.php" afterPath="$PROJECT_DIR$/app/library/Curl.php" />
+      <change beforePath="$PROJECT_DIR$/app/library/Reflec.php" afterPath="$PROJECT_DIR$/app/library/Reflec.php" />
+      <change beforePath="$PROJECT_DIR$/app/library/Rsa.php" afterPath="$PROJECT_DIR$/app/library/Rsa.php" />
       <change beforePath="$PROJECT_DIR$/app/library/Tools/Config.php" afterPath="$PROJECT_DIR$/app/library/Tools/Config.php" />
       <change beforePath="$PROJECT_DIR$/app/library/Tools/Request.php" afterPath="$PROJECT_DIR$/app/library/Tools/Request.php" />
       <change beforePath="$PROJECT_DIR$/app/library/Twig.php" afterPath="$PROJECT_DIR$/app/library/Twig.php" />
+      <change beforePath="$PROJECT_DIR$/app/library/Validate.php" afterPath="$PROJECT_DIR$/app/library/Validate.php" />
       <change beforePath="$PROJECT_DIR$/app/models/Sample.php" afterPath="$PROJECT_DIR$/app/models/Sample.php" />
+      <change beforePath="$PROJECT_DIR$/app/modules/Api/controllers/ApiBase.php" afterPath="$PROJECT_DIR$/app/modules/Api/controllers/ApiBase.php" />
+      <change beforePath="$PROJECT_DIR$/app/modules/Api/controllers/Goods.php" afterPath="$PROJECT_DIR$/app/modules/Api/controllers/Goods.php" />
       <change beforePath="$PROJECT_DIR$/app/modules/Api/controllers/User.php" afterPath="$PROJECT_DIR$/app/modules/Api/controllers/User.php" />
       <change beforePath="$PROJECT_DIR$/app/modules/Api/models/User.php" afterPath="$PROJECT_DIR$/app/modules/Api/models/User.php" />
       <change beforePath="$PROJECT_DIR$/app/modules/Api/services/User.php" afterPath="$PROJECT_DIR$/app/modules/Api/services/User.php" />
-      <change beforePath="$PROJECT_DIR$/app/plugins/Api.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/app/plugins/ApiDispatch.php" afterPath="$PROJECT_DIR$/app/plugins/ApiDispatch.php" />
       <change beforePath="$PROJECT_DIR$/app/plugins/CommonException.php" afterPath="$PROJECT_DIR$/app/plugins/CommonException.php" />
       <change beforePath="$PROJECT_DIR$/app/plugins/CommonLog.php" afterPath="$PROJECT_DIR$/app/plugins/CommonLog.php" />
       <change beforePath="$PROJECT_DIR$/app/plugins/Cros.php" afterPath="$PROJECT_DIR$/app/plugins/Cros.php" />
@@ -42,8 +57,12 @@
       <change beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
       <change beforePath="$PROJECT_DIR$/static/_common/errors/error_general.php" afterPath="$PROJECT_DIR$/static/_common/errors/error_general.php" />
       <change beforePath="$PROJECT_DIR$/static/_common/errors/exception_general.php" afterPath="$PROJECT_DIR$/static/_common/errors/exception_general.php" />
-      <change beforePath="$PROJECT_DIR$/static/views/error/error.phtml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/static/views/common/container.html" afterPath="$PROJECT_DIR$/static/views/common/container.html" />
+      <change beforePath="$PROJECT_DIR$/static/views/common/footer.html" afterPath="$PROJECT_DIR$/static/views/common/footer.html" />
+      <change beforePath="$PROJECT_DIR$/static/views/common/header.html" afterPath="$PROJECT_DIR$/static/views/common/header.html" />
+      <change beforePath="$PROJECT_DIR$/static/views/index/detail.html" afterPath="$PROJECT_DIR$/static/views/index/detail.html" />
       <change beforePath="$PROJECT_DIR$/static/views/index/index.html" afterPath="$PROJECT_DIR$/static/views/index/index.html" />
+      <change beforePath="$PROJECT_DIR$/static/views/index/vv.html" afterPath="$PROJECT_DIR$/static/views/index/vv.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -57,44 +76,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/Index.php">
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/modules/Api/controllers/User.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Sample.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/Sample.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" column="33" lean-forward="false" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseModel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/core/BaseModel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-              <folding>
-                <element signature="e#6#129#0#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -102,43 +89,49 @@
       <file leaf-file-name="CoreModel.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/core/CoreModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-              <folding>
-                <marker date="1540377288154" expanded="false" signature="9:127" ph=" Created by PhpStorm. ..." />
-                <marker date="1540377288154" expanded="true" signature="148:1497" ph="..." />
-                <marker date="1540377288154" expanded="true" signature="312:466" ph="..." />
-                <marker date="1540377288154" expanded="true" signature="474:498" ph=" 构造方法 PS：仿照构造方法 ..." />
-                <marker date="1540377288154" expanded="true" signature="527:534" ph="..." />
-                <marker date="1540377288154" expanded="true" signature="574:960" ph="..." />
-                <marker date="1540377288154" expanded="true" signature="678:775" ph="..." />
-                <marker date="1540377288154" expanded="true" signature="806:955" ph="..." />
-                <marker date="1540377288154" expanded="true" signature="807:954" ph="..." />
-                <marker date="1540377288154" expanded="true" signature="968:1075" ph=" 请求前处理数据（加密或组装数据） ..." />
-                <marker date="1540377288154" expanded="true" signature="1125:1146" ph="..." />
-                <marker date="1540377288154" expanded="true" signature="1154:1268" ph=" 请求成功后处理数据（处理解密数据，禁止在此处判断数据状态） ..." />
-                <marker date="1540377288154" expanded="true" signature="1317:1338" ph="..." />
-                <marker date="1540377288154" expanded="true" signature="1346:1429" ph=" 请求完成后处理数据（判断数据状态或拼接数据） ..." />
-                <marker date="1540377288154" expanded="true" signature="1473:1494" ph="..." />
-              </folding>
+            <state relative-caret-position="121">
+              <caret line="243" column="46" lean-forward="true" selection-start-line="243" selection-start-column="46" selection-end-line="243" selection-end-column="46" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CoreController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/core/CoreController.php">
+      <file leaf-file-name="api.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/configs/api.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="11" column="5" lean-forward="true" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-              <folding>
-                <marker date="1540368238077" expanded="false" signature="9:127" ph=" Created by PhpStorm. ..." />
-                <marker date="1540368238077" expanded="true" signature="185:543" ph="..." />
-                <marker date="1540368238077" expanded="true" signature="192:234" ph=" 获取项目运行最后的错误信息 ..." />
-                <marker date="1540368238077" expanded="true" signature="267:416" ph="..." />
-                <marker date="1540368238077" expanded="true" signature="280:411" ph="..." />
-                <marker date="1540368238077" expanded="true" signature="424:487" ph=" 调用不存在的方法时，调用 ..." />
-                <marker date="1540368238077" expanded="true" signature="535:539" ph="..." />
-              </folding>
+            <state relative-caret-position="336">
+              <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/modules/Api/services/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="500">
+              <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="63">
+              <caret line="3" column="45" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/modules/Api/models/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="310">
+              <caret line="98" column="33" lean-forward="false" selection-start-line="98" selection-start-column="33" selection-end-line="98" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -154,19 +147,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>_error_handler</find>
-      <find>SESSION_PREFIX .</find>
-      <find>Please check your status code number or</find>
-      <find>show_error</find>
-      <find>this will throw an Error in a future version of</find>
-      <find>exception</find>
-      <find>run</find>
-      <find>controller</find>
-      <find>__construct</find>
-      <find>write_log</find>
-      <find>_messa</find>
-      <find>_exception_handler</find>
-      <find>filepath</find>
       <find>batch</find>
       <find>__set</find>
       <find>Reflection</find>
@@ -184,6 +164,19 @@
       <find>display</find>
       <find>_fetchEx</find>
       <find>getRequest</find>
+      <find>getCallerFromTrace</find>
+      <find>setHost</find>
+      <find>接口地址</find>
+      <find>checkin</find>
+      <find>fetchLog</find>
+      <find>FETCH_DUMMY</find>
+      <find>postJson</find>
+      <find>_fetchex</find>
+      <find>_initCurl</find>
+      <find>parseurl</find>
+      <find>_parseUrl</find>
+      <find>setRequest</find>
+      <find>init</find>
     </findStrings>
     <replaceStrings>
       <replace>/app/tuozhan/smarty/</replace>
@@ -201,8 +194,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/app/core/Log.php" />
         <option value="$PROJECT_DIR$/app/plugins/Cros.php" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/app/modules/Api/controllers/Api.php" />
@@ -210,31 +201,20 @@
         <option value="$PROJECT_DIR$/app/library/ApiException.php" />
         <option value="$PROJECT_DIR$/app/plugins/InitException.php" />
         <option value="$PROJECT_DIR$/app/plugins/CommonException.php" />
-        <option value="$PROJECT_DIR$/app/modules/Api/models/User.php" />
-        <option value="D:/Tools/phpstorm_plugs_tixing/yaf_plugin_common/my_models.php" />
         <option value="$PROJECT_DIR$/app/modules/Api/services/Base.php" />
-        <option value="D:/Tools/phpstorm_plugs_tixing/yaf_plugin_common/Yaf_phpStorm.php" />
         <option value="$PROJECT_DIR$/app/plugins/Api.php" />
         <option value="$PROJECT_DIR$/app/configs/initConfig.php" />
-        <option value="$PROJECT_DIR$/app/modules/Api/controllers/User.php" />
         <option value="$PROJECT_DIR$/app/library/Reflection.php" />
         <option value="$PROJECT_DIR$/app/library/Reflectionbb.php" />
         <option value="$PROJECT_DIR$/app/library/Reflec.php" />
         <option value="$PROJECT_DIR$/data/cache/validate/form_UserService.php" />
         <option value="$PROJECT_DIR$/app/library/Lang.php" />
-        <option value="$PROJECT_DIR$/app/core/Exceptions.php" />
         <option value="$PROJECT_DIR$/app/library/Validate.php" />
-        <option value="$PROJECT_DIR$/app/core/ProxyModel.php" />
         <option value="$PROJECT_DIR$/app/modules/Api/controllers/Goods.php" />
-        <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/app/modules/Api/controllers/ApiBase.php" />
-        <option value="$PROJECT_DIR$/app/modules/Api/services/User.php" />
         <option value="$PROJECT_DIR$/app/core/CoreController.php" />
         <option value="$PROJECT_DIR$/app/core/BaseBootstrap.php" />
         <option value="$PROJECT_DIR$/app/Bootstrap.php" />
         <option value="$PROJECT_DIR$/app/core/CoreService.php" />
-        <option value="$PROJECT_DIR$/app/core/BaseService.php" />
-        <option value="$PROJECT_DIR$/static/_common/errors/exception_general.php" />
         <option value="$PROJECT_DIR$/app/plugins/ApiDispatch.php" />
         <option value="$PROJECT_DIR$/static/views/common/footer.html" />
         <option value="$PROJECT_DIR$/static/views/common/header.html" />
@@ -244,14 +224,27 @@
         <option value="$PROJECT_DIR$/app/configs/config.ini" />
         <option value="$PROJECT_DIR$/app/core/Trait.php" />
         <option value="$PROJECT_DIR$/app/configs/autoload.php" />
-        <option value="$PROJECT_DIR$/app/core/BaseController.php" />
-        <option value="$PROJECT_DIR$/app/core/Common.php" />
-        <option value="$PROJECT_DIR$/app/configs/api.php" />
         <option value="$PROJECT_DIR$/app/core/TraitCommon.php" />
+        <option value="D:/Tools/phpstorm_plugs_tixing/yaf_plugin_common/Yaf_phpStorm.php" />
+        <option value="D:/Tools/phpstorm_plugs_tixing/yaf_plugin_common/my_models.php" />
+        <option value="$PROJECT_DIR$/app/core/ProxyModel.php" />
+        <option value="$PROJECT_DIR$/app/modules/Api/controllers/ApiBase.php" />
+        <option value="$PROJECT_DIR$/app/core/BaseService.php" />
         <option value="$PROJECT_DIR$/app/controllers/Index.php" />
-        <option value="$PROJECT_DIR$/app/core/CoreModel.php" />
-        <option value="$PROJECT_DIR$/app/core/BaseModel.php" />
+        <option value="$PROJECT_DIR$/app/core/BaseController.php" />
         <option value="$PROJECT_DIR$/app/models/Sample.php" />
+        <option value="$PROJECT_DIR$/data/logs/app.php" />
+        <option value="$PROJECT_DIR$/app/core/Exceptions.php" />
+        <option value="$PROJECT_DIR$/static/_common/errors/exception_general.php" />
+        <option value="$PROJECT_DIR$/app/library/Curl.php" />
+        <option value="$PROJECT_DIR$/app/core/BaseModel.php" />
+        <option value="$PROJECT_DIR$/app/core/Common.php" />
+        <option value="$PROJECT_DIR$/app/modules/Api/services/User.php" />
+        <option value="$PROJECT_DIR$/app/modules/Api/controllers/User.php" />
+        <option value="$PROJECT_DIR$/app/core/CoreModel.php" />
+        <option value="$PROJECT_DIR$/app/modules/Api/models/User.php" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/app/configs/api.php" />
       </list>
     </option>
   </component>
@@ -273,11 +266,33 @@
       <path value="D:\Tools\phpstorm_plugs_tixing\yaf_plugin_common" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
     <option name="height" value="744" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Code SmellPHP</id>
+          </State>
+          <State>
+            <id>PHP</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>PhpMethodParametersCountMismatchInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -335,12 +350,59 @@
               <item name="api" type="b2602c69:ProjectViewProjectNode" />
               <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Api" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="models" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="plugins" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="api" type="b2602c69:ProjectViewProjectNode" />
               <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="data" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="data" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="logs" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="static" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="api" type="b2602c69:ProjectViewProjectNode" />
@@ -415,18 +477,17 @@
       <workItem from="1539671506317" duration="45025000" />
       <workItem from="1539842811735" duration="79913000" />
       <workItem from="1540270621330" duration="6914000" />
-      <workItem from="1540345974046" duration="24008000" />
+      <workItem from="1540345974046" duration="43798000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155860000" />
+    <option name="totallyTimeSpent" value="175650000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22789635" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24237806" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881355" sideWeight="0.5030488" order="7" side_tool="true" content_ui="tabs" />
@@ -479,62 +540,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/logs/2018_10_22_16_52_43.php" />
-    <entry file="file://$PROJECT_DIR$/app/plugins/CommonLog.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/plugins/Cros.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="18" column="40" lean-forward="false" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/plugins/Sample.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/Core/Core_c.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="282" column="20" lean-forward="false" selection-start-line="282" selection-start-column="20" selection-end-line="282" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/plugins/InitException.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="12" column="7" lean-forward="true" selection-start-line="12" selection-start-column="7" selection-end-line="12" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/plugins/CommonException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="13" column="8" lean-forward="true" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/modules/Api/models/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Tools/phpstorm_plugs_tixing/yaf_plugin_common/my_models.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="33" lean-forward="false" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -568,22 +577,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/modules/Api/controllers/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="13" column="15" lean-forward="true" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/Exceptions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/modules/Api/controllers/Goods.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -608,50 +601,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/ProxyModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-336">
-          <caret line="113" column="48" lean-forward="true" selection-start-line="113" selection-start-column="48" selection-end-line="113" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/library/ApiException.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
           <caret line="28" column="3" lean-forward="true" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/modules/Api/controllers/ApiBase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="23" column="28" lean-forward="true" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/modules/Api/services/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="701">
-          <caret line="41" column="42" lean-forward="false" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Tools/phpstorm_plugs_tixing/yaf_plugin_common/Yaf_phpStorm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
           <folding />
         </state>
       </provider>
@@ -665,21 +618,6 @@
             <marker date="1540368601379" expanded="true" signature="149:246" ph="..." />
             <marker date="1540368601379" expanded="true" signature="190:212" ph="..." />
             <marker date="1540368601379" expanded="true" signature="240:244" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/BaseService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="12" lean-forward="true" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
-          <folding>
-            <marker date="1540368627555" expanded="false" signature="9:127" ph=" Created by PhpStorm. ..." />
-            <marker date="1540368627555" expanded="true" signature="170:573" ph="..." />
-            <marker date="1540368627555" expanded="true" signature="177:342" ph=" 统一返回格式化数据 ..." />
-            <marker date="1540368627555" expanded="true" signature="436:571" ph="..." />
-            <marker date="1540368627555" expanded="true" signature="458:477" ph="..." />
-            <marker date="1540368627555" expanded="true" signature="491:566" ph="..." />
           </folding>
         </state>
       </provider>
@@ -704,22 +642,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/_common/errors/exception_general.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="349" column="92" lean-forward="false" selection-start-line="349" selection-start-column="92" selection-end-line="349" selection-end-column="92" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/plugins/ApiDispatch.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="25" column="5" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -794,58 +716,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/configs/config.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/configs/autoload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/BaseController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/Common.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="614" column="1" lean-forward="false" selection-start-line="614" selection-start-column="1" selection-end-line="614" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/core/TraitCommon.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
           <caret line="74" column="34" lean-forward="true" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/configs/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/Index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -866,52 +740,226 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/CoreModel.php">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <marker date="1540377288154" expanded="false" signature="9:127" ph=" Created by PhpStorm. ..." />
-            <marker date="1540377288154" expanded="true" signature="148:1497" ph="..." />
-            <marker date="1540377288154" expanded="true" signature="312:466" ph="..." />
-            <marker date="1540377288154" expanded="true" signature="474:498" ph=" 构造方法 PS：仿照构造方法 ..." />
-            <marker date="1540377288154" expanded="true" signature="527:534" ph="..." />
-            <marker date="1540377288154" expanded="true" signature="574:960" ph="..." />
-            <marker date="1540377288154" expanded="true" signature="678:775" ph="..." />
-            <marker date="1540377288154" expanded="true" signature="806:955" ph="..." />
-            <marker date="1540377288154" expanded="true" signature="807:954" ph="..." />
-            <marker date="1540377288154" expanded="true" signature="968:1075" ph=" 请求前处理数据（加密或组装数据） ..." />
-            <marker date="1540377288154" expanded="true" signature="1125:1146" ph="..." />
-            <marker date="1540377288154" expanded="true" signature="1154:1268" ph=" 请求成功后处理数据（处理解密数据，禁止在此处判断数据状态） ..." />
-            <marker date="1540377288154" expanded="true" signature="1317:1338" ph="..." />
-            <marker date="1540377288154" expanded="true" signature="1346:1429" ph=" 请求完成后处理数据（判断数据状态或拼接数据） ..." />
-            <marker date="1540377288154" expanded="true" signature="1473:1494" ph="..." />
-          </folding>
+        <state relative-caret-position="399">
+          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/core/BaseModel.php">
+    <entry file="file://D:/Tools/phpstorm_plugs_tixing/yaf_plugin_common/Yaf_phpStorm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Tools/phpstorm_plugs_tixing/yaf_plugin_common/my_models.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <element signature="e#6#129#0#PHP" expanded="true" />
-          </folding>
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/standard_4.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="851" column="9" lean-forward="false" selection-start-line="851" selection-start-column="9" selection-end-line="851" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/Core/Core.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="990" column="13" lean-forward="true" selection-start-line="990" selection-start-column="13" selection-end-line="990" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/configs/autoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="39" column="11" lean-forward="false" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/ProxyModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="140" column="4" lean-forward="true" selection-start-line="140" selection-start-column="4" selection-end-line="140" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/modules/Api/controllers/ApiBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="44" column="23" lean-forward="true" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/plugins/ApiDispatch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="20" column="2" lean-forward="false" selection-start-line="20" selection-start-column="2" selection-end-line="25" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/configs/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/BaseService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="57" column="18" lean-forward="true" selection-start-line="57" selection-start-column="18" selection-end-line="57" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/BaseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="45" column="5" lean-forward="true" selection-start-line="45" selection-start-column="5" selection-end-line="45" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/Index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/Sample.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="33" lean-forward="false" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+        <state relative-caret-position="315">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/app/controllers/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="13" column="3" lean-forward="true" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/_common/errors/exception_general.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="328" column="10" lean-forward="true" selection-start-line="328" selection-start-column="10" selection-end-line="328" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/library/Curl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="113" column="74" lean-forward="true" selection-start-line="113" selection-start-column="74" selection-end-line="113" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/logs/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="376" column="43" lean-forward="false" selection-start-line="376" selection-start-column="43" selection-end-line="376" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/plugins/CommonException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/Exceptions.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/BaseModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/Common.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="679" column="0" lean-forward="true" selection-start-line="679" selection-start-column="0" selection-end-line="679" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/core/CoreModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="243" column="46" lean-forward="true" selection-start-line="243" selection-start-column="46" selection-end-line="243" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/modules/Api/models/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="98" column="33" lean-forward="false" selection-start-line="98" selection-start-column="33" selection-end-line="98" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/modules/Api/services/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/modules/Api/controllers/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="45" lean-forward="false" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/configs/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="34" column="0" lean-forward="true" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
       </provider>

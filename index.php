@@ -1,6 +1,7 @@
 <?php
 
 define('ENVIRONMENT', isset($_SERVER['HTTP_ENV']) ? $_SERVER['HTTP_ENV'] : 'product');
+isset($_SERVER['HTTP_FETCH_DUMMY']) && define('FETCH_DUMMY',$_SERVER['HTTP_FETCH_DUMMY']);
 define('APP_PATH', dirname(__FILE__));
 define('CONFIGPATH', APP_PATH . '/app/configs/config.ini');
 require_once APP_PATH . DIRECTORY_SEPARATOR . 'vendor/autoload.php';

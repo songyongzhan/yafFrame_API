@@ -227,7 +227,7 @@ class Curl {
     $log[] = '请求方式 ' . (isAjax() ? 'Ajax ' : '') . $_SERVER['REQUEST_METHOD'] . ' [' . ENVIRONMENT . ']';
     $log[] = '访问链接 ' . $_SERVER['REQUEST_URI'] . ' [' . $_SERVER['REMOTE_ADDR'] . ']';
 
-    if (ENVIRONMENT !== 'production') $log[] = '调用文件 ' . getCallerFromTrace();
+    //if (ENVIRONMENT !== 'production') $log[] = '调用文件 ' . getCallerFromTrace();
 
     $log[] = '接口地址 ' . $url . (ENVIRONMENT === 'production' && !isLocalhost() ? '' :
       ' [' . gethostbyname(parse_url($url, PHP_URL_HOST)) . ']');

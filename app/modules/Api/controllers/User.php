@@ -9,51 +9,20 @@
 
 class UserController extends ApiBaseController {
 
-  public function bbAction(){
-    echo  'bb';
-    echo '123';
+  public function bbAction() {
+    $data = $this->UserService->bb(1);
+    return $data;
   }
 
+  public function indexAction() {
 
-
-
-  public function indexAction(){
-
-
-    var_dump($this->UserService->name);
-
-
-   $data= $this->UserService->index('','','','');
+    $data = $this->UserService->index('james', '123', '2', 'ff');
 
     P($data);
 
     exit;
 
-   /* echo ' modules Api index 方法';
-
-
-    $db=Yaf_Registry::get('db');
-    $data=$db->get('goods_category',10);
-    P($data);
-
-    P($this->getResponse());*/
-
-
-//    $this->UserService->index();
-
-
-
-    //$userModel=new UserModel();
-    //
-    //(new UserService())->index();
-    //
-    //P($userModel->index());
-    //
-    //P();
-
-
   }
-
 
 
 }

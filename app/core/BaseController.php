@@ -11,7 +11,7 @@ class BaseController extends CoreController {
 
   use TraitCommon;
 
-  public static  $_object  = [];
+  private static $_object = [];
 
 
   /**
@@ -20,8 +20,6 @@ class BaseController extends CoreController {
   public function init() {
 
   }
-
-
 
 
   public function _render($templateFile) {
@@ -35,8 +33,6 @@ class BaseController extends CoreController {
   public function assign($key, $val) {
     $this->getView()->assign($key, $val);
   }
-
-
 
 
   public final function __set($name, $value) {
@@ -56,7 +52,8 @@ class BaseController extends CoreController {
       $value = (self::$_object)[$name];
     else if (strpos($name, 'Model') || strpos($name, 'Service')) {
       $nameClass = ucfirst($name);
-      if (class_exists($nameClass) && checkInclude($nameClass)) {
+      if (class_exists($nameClass)) {
+        (strtolower(getRequest()->getModuleName()) != strtolower(Tools_Config::getConfig('application.dispatcher.defaultModule'))) && checkInclude($nameClass);
         $value = new ProxyModel(new $nameClass());
         $this->$name = $value;
       }

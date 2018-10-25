@@ -45,10 +45,7 @@ class ApiBaseController extends BaseController {
    * @throws Exceptions
    */
   private function _parseUri() {
-    $uri = $this->getRequest()->getRequestUri();
-    $data = array_slice(explode('/', trim($uri, '/')), 0, 3);
-    if (count($data) !== 3) throw new Exceptions(' Parameter passing error. Please check if there is a module name.', 500);
-    return array_combine(['module', 'controller', 'action'], array_map(function ($val) { return ucfirst($val); }, $data));
+    return _parseCurrentUri();
   }
 
 

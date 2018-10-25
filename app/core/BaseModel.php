@@ -11,8 +11,9 @@ class BaseModel extends CoreModel {
 
   use TraitCommon;
 
-  public function getdb() {
-    return $this->_db;
-  }
+  public static $header = [
+
+  ];
+
 
 }

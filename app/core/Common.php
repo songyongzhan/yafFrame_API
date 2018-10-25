@@ -15,6 +15,12 @@ if (!function_exists('P')) {
   }
 }
 
+if (!function_exists('Pv')) {
+  function Pv($arr, $fun = 'var_dump', $fontsize = 20, $color = 'blue') {
+    P($arr, $fun, $fontsize, $color);
+  }
+}
+
 if (!function_exists('import')) {
   /**
    * 引入类
@@ -244,6 +250,7 @@ if (!function_exists('_exception_handler')) {
 
     isCli() OR set_status_header(500);
 
+    //P($exception);
     // Should we display the error?
     if (str_ireplace(array('off', 'none', 'no', 'false', 'null'), '', ini_get('display_errors'))) {
 
@@ -612,4 +619,72 @@ if (!function_exists('getClientIP')) {
       if (!empty($_SERVER[$value])) return $_SERVER[$value];
     }
   }
+}
+
+
+if (!function_exists('isLocalhost')) {
+  function isLocalhost() {
+    return strpos($_SERVER['HTTP_HOST'], '127.0.0.1') === 0;
+  }
+}
+
+
+function getCallerFromTrace() {
+  //产生一条回溯跟踪 参数：忽略args的索引，包括所有的function/method参数，以节省内存
+  $traces = array_reverse(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
+  //$traces = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+
+  $apiInterceptor = array_change_value_case(explode(',', Tools_Config::getConfig('api.interceptor')), CASE_LOWER);
+  $moduleName = Tools_Request::getModuleName();
+  if (strtolower($moduleName) !== strtolower(Tools_Config::getConfig('application.dispatcher.defaultModule')) && in_array(strtolower($moduleName), $apiInterceptor)) {
+    $uri = _parseCurrentUri();
+    $file = MODULES_PATH . DS . $moduleName . DS . 'controllers/' . $uri['controller'] . '.' . Tools_Config::getConfig('application.ext');
+  } else {
+    $file = APP_PATH . DS . 'app/controllers/' . (getRequest()->getControllerName()) . '.' . Tools_Config::getConfig('application.ext');
+  }
+  $index = NULL;
+  foreach ($traces as $key => $val) {
+    if (isset($val['file']) && ($val['file'] == $file)) {
+      $index = $key;
+      break;
+    }
+  }
+  $result = is_null($index) ? NULL : isset($traces[$index]) ? $traces[$index] : NULL;
+
+  if (!$result) return '';
+  $callerFile = str_replace(APP_PATH, '', $result['file']);
+  return sprintf(' %s line [%d]', $callerFile, $result['line']);
+}
+
+
+if (!function_exists('_parseCurrentUri')) {
+  function _parseCurrentUri() {
+    $uri = getRequest()->getRequestUri();
+    $data = array_slice(explode('/', trim($uri, '/')), 0, 3);
+    if (count($data) !== 3) throw new Exceptions(' Parameter passing error. Please check if there is a module name.', 500);
+    return array_combine(['module', 'controller', 'action'], array_map(function ($val) { return ucfirst($val); }, $data));
+  }
+}
+
+
+/**
+ * 输出提示信息JSON
+ * @param mixed $code 状态码
+ * @param string $msg 提示信息
+ * @param string $url 跳转链接
+ */
+function showJsonMsg($code, $msg = NULL, $url = '') {
+  header('Content-Type: text/plain; charset=utf-8'); //application/json  text/plain IE8-
+  die(jsonencode(_getJson($code, $msg, $url)));
+}
+
+function _getJson($code, $msg, $url) {
+  if (is_array($code)) {
+    $msg = $code['message'];
+    $code = $code['status'];
+  }
+  $result['code'] = $code;
+  $result['message'] = $msg;
+  isset($url) && $result['url'] = strval($url);
+  return $result;
 }
