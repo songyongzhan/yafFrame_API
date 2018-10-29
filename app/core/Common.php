@@ -394,6 +394,7 @@ if (!function_exists('show_error')) {
    * @return  void
    */
   function show_error($message, $status_code = 500, $heading = 'An Error Was Encountered') {
+    isAjax() && showJsonMsg($status_code, $message);
     $status_code = abs($status_code);
     if ($status_code < 100) {
       $exit_status = $status_code + 9; // 9 is EXIT__AUTO_MIN
