@@ -13,7 +13,10 @@ require_once APP_PATH . DIRECTORY_SEPARATOR . 'app/configs/api.php';
 }*/
 
 $autoload = [];
-$autoload['helper'] = array('funs');
+$autoload['helper'] = array(
+  'helper_funs' => 'funs',
+  'StatusCode' => 'StatusCode'
+);
 
 $autoload['_autoload'] = array(
   'TraitCommon' => APP_PATH . '/app/core/TraitCommon.php',

@@ -20,5 +20,12 @@ class GoodsController extends ApiBaseController {
 
   }
 
+  public function testAction(){
+
+    echo PHP_INT_SIZE;
+
+    exit;
+  }
+
 
 }

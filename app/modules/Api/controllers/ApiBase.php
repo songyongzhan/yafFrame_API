@@ -23,7 +23,8 @@ class ApiBaseController extends BaseController {
       $this->showJson($data['result'], $data['code'], $data['msg']);
     } catch (Exception $e) {
       //$this->showJson([], API_FAILURE, $e->getMessage());
-      showApiException($e->getMessage(), $e->getCode());
+      show_error($e->getMessage(), $e->getCode());
+      //showApiException($e->getMessage(), $e->getCode());
     }
   }
 

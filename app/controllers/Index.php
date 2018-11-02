@@ -9,18 +9,15 @@
 class IndexController extends BaseController {
 
 
-  public function detailAction(){
+  public function detailAction() {
 
-   /* $model=new SampleModel();
-    $model->selectSample();*/
+    /* $model=new SampleModel();
+     $model->selectSample();*/
     $this->SampleModel->selectSample();
 
-    $this->assign('user','james');
+    $this->assign('user', 'james');
     $this->getView()->display('/index/detail.html');
     //echo $this->_render('/index/detail.html');
-
-
-
 
 
   }
@@ -36,8 +33,8 @@ class IndexController extends BaseController {
 
     //return json_encode(['name'=>'james','age'=>'33']);
 
-    echo json_encode(['name'=>'james','age'=>'33']);
-    return true;
+    echo json_encode(['name' => 'james', 'age' => '33']);
+    return TRUE;
     //$this->getResponse()->setBody('content', ['name' => 'james', 'age' => '33']);
 
 
