@@ -14,6 +14,9 @@ define('APP_CONFIG_PATH', APP_PATH . DS . 'app/configs');
 
 define('MODULES_PATH', APP_PATH . DS . 'app/modules'); //多模块位置
 
+
+define('COOKIE_KEY', 'asfd654987'); //10
+
 define('API_SUCCESS', 200000);
 define('API_FAILURE', 999999);
 define('API_FAILURE_MSG', '系统错误请联系管理员!');

@@ -15,6 +15,16 @@ class IndexController extends BaseController {
      $model->selectSample();*/
     $this->SampleModel->selectSample();
 
+
+    //$arr=['id'=>'iser','name'=>'aa'];
+    //$this->_setCookie('vv',$arr);
+
+    //$this->_setCookie('user','james');
+    $this->_delCookie('vv');
+
+    P($this->_getCookie('vv'));
+    //var_dump($this->_getCookie('user'));
+
     $this->assign('user', 'james');
     $this->getView()->display('/index/detail.html');
     //echo $this->_render('/index/detail.html');

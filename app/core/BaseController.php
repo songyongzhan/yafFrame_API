@@ -18,7 +18,7 @@ class BaseController extends CoreController {
    * 构造方法 PS：仿照构造方法
    */
   public function init() {
-
+    
   }
 
 

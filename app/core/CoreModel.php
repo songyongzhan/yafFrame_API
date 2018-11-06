@@ -9,7 +9,7 @@
 
 class CoreModel {
 
-  private $_db = NULL;
+
 
   protected $_host = NULL;
   //private   $_curl      = NULL;
@@ -17,15 +17,14 @@ class CoreModel {
 
 
   public final function __construct() {
-    $this->_db = Yaf_Registry::has('db') ? Yaf_Registry::get('db') : NULL;
     $this->setHost(); //设置远程接口地址
-    $this->init();
+    $this->_init();
   }
 
   /**
    * 构造方法 PS：仿照构造方法
    */
-  protected function init() {
+  protected function _init() {
 
   }
 

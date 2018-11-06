@@ -35,7 +35,7 @@ if (!function_exists('import')) {
 if (!function_exists('app')) {
   /**
    * 获取application对象
-   * @return mixed
+   * @return Yaf_Application
    */
   function app() {
     return Yaf_Application::app();
@@ -44,8 +44,8 @@ if (!function_exists('app')) {
 
 if (!function_exists('getDispatcher')) {
   /**
-   * 获取转发对象
-   * @return mixed
+   *
+   * @return Yaf_Dispatcher
    */
   function getDispatcher() {
     return Yaf_Dispatcher::getInstance();
@@ -54,6 +54,9 @@ if (!function_exists('getDispatcher')) {
 
 
 if (!function_exists('getRequest')) {
+  /**
+   * @return Yaf_Request_Abstract
+   */
   function getRequest() {
     return Yaf_Dispatcher::getInstance()->getRequest();
   }
@@ -688,4 +691,64 @@ function _getJson($code, $msg, $url) {
   $result['message'] = $msg;
   isset($url) && $result['url'] = strval($url);
   return $result;
+}
+
+
+/**
+ * Convert PHP tags to entities
+ *
+ * @param  string
+ * @return  string
+ */
+function encode_php_tags($str) {
+  return str_replace(array('<?', '?>'), array('&lt;?', '?&gt;'), $str);
+}
+
+
+function base64encode($data, $urlsafe = FALSE) {
+  $data = base64_encode($data);
+
+  return $urlsafe ? strtr($data, '+/', '-_') : $data;
+}
+
+function base64decode($data, $urlsafe = FALSE) {
+  return base64_decode($urlsafe ? strtr($data, '-_', '+/') : $data);
+}
+
+function AESEncrypt($data, $key, $urlsafe = FALSE) { //openssl_get_cipher_methods
+  if ($data && $key) {
+    $iv = openssl_random_pseudo_bytes(16);
+    $data = base64encode($iv . openssl_encrypt($data, 'aes-128-cbc', $key, OPENSSL_RAW_DATA, $iv), $urlsafe);
+  }
+
+  return $data;
+}
+
+function AESDecrypt($data, $key, $urlsafe = FALSE) {
+  if (strlen($data) >= 16 + 16 && $key) {
+    $data = base64decode($data, $urlsafe);
+    $data = openssl_decrypt(substr($data, 16), 'aes-128-cbc', $key, OPENSSL_RAW_DATA, substr($data, 0, 16));
+  }
+
+  return $data;
+}
+
+function DESEncrypt($data, $key, $urlsafe = FALSE) {
+  if ($data && $key) {
+    $data = openssl_encrypt($data, 'des-ecb', $key);
+
+    $urlsafe && $data = strtr($data, '+/', '-_');
+  }
+
+  return $data;
+}
+
+function DESDecrypt($data, $key, $urlsafe = FALSE) {
+  if ($data && $key) {
+    $urlsafe && $data = strtr($data, '-_', '+/');
+
+    $data = openssl_decrypt($data, 'des-ecb', $key);
+  }
+
+  return $data;
 }
