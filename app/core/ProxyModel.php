@@ -9,11 +9,12 @@
 
 class ProxyModel {
 
-  public static $_object    = [];
-  private       $_rule      = [];//验证规则
-  private       $_instance  = NULL;
-  private       $_classname = NULL;
-  private       $_cachePath = APP_PATH . DS . 'data/cache/validate';
+  public static  $_object          = [];
+  private        $_rule            = [];//验证规则
+  private        $_instance        = NULL;
+  private        $_classname       = NULL;
+  private        $_cachePath       = APP_PATH . DS . 'data/cache/validate';
+  private static $_validateContent = NULL;
   const IGNORE = ['BaseModel'];
 
   public function __construct($obj, $name = NULL) {
@@ -42,14 +43,17 @@ class ProxyModel {
       ENVIRONMENT === 'devlop' && logMessage('debug', '自动验证:' . $this->_classname . '->' . $method . '() 参数:' . jsonencode($params));
       $reflection = new Reflec($this->_instance);
       $validateFile = $this->_cachePath . DS . 'form_' . $this->_classname . '.' . Tools_Config::getConfig('application.ext');
+
       if (file_exists($validateFile) && (filemtime($validateFile) > $reflection->getFileTime())) {
-        $this->_rule = require_once $validateFile;
+        is_null(self::$_validateContent) && self::$_validateContent = require_once $validateFile;
+        $this->_rule = self::$_validateContent;
       } else {
         $this->_rule = $this->_makeFile($reflection, $validateFile);
       }
 
       if (!is_array($rules = $this->_rule))
-        show_error('$this->_rule is not Array.');
+        throw new Exceptions('$this->_rule is not Array.', 500);
+
       //如果最后一个参数是数组，则和其他参数合并在一起
       if (isset($rules['rules'][$method]) && ($methodRules = $rules['rules'][$method])) {
 

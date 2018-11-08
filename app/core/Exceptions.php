@@ -76,3 +76,8 @@ class Exceptions extends Yaf_Exception {
 }
 
 
+class InvalideException extends Exceptions{
+  
+}
+
+

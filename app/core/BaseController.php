@@ -18,7 +18,7 @@ class BaseController extends CoreController {
    * 构造方法 PS：仿照构造方法
    */
   public function init() {
-    
+
   }
 
 
@@ -46,9 +46,9 @@ class BaseController extends CoreController {
    */
   public final function __get($name) {
     $value = NULL;
-    if (in_array($name, self::$_object) && is_callable((self::$_object)[$name]))
+    if (key_exists($name, self::$_object) && is_callable((self::$_object)[$name]))
       $value = (self::$_object)[$name]();
-    else if (in_array($name, self::$_object))
+    else if (key_exists($name, self::$_object))
       $value = (self::$_object)[$name];
     else if (strpos($name, 'Model') || strpos($name, 'Service')) {
       $nameClass = ucfirst($name);

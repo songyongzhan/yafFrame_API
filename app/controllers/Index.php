@@ -11,6 +11,131 @@ class IndexController extends BaseController {
 
   public function detailAction() {
 
+
+    $data = [
+      'nav' => 3,
+      'title' => '321',
+      'bodycontent' => '123123123123123123content',
+      'mtime' => time()
+    ];
+
+    $result=$this->NewsModel->insert($data,'bb');
+
+
+
+
+    $multidata = [
+
+      [
+        'nav' => 3,
+        'title' => rand(100, 999),
+        'bodycontent' => '123123123123123123content',
+        'mtime' => time()
+      ], [
+        'nav' => 3,
+        'title' => rand(100, 999),
+        'bodycontent' => '123123123123123123content',
+        'mtime' => time()
+      ], [
+        'nav' => 3,
+        'title' => rand(100, 999),
+        'bodycontent' => '123123123123123123content',
+        'mtime' => time()
+      ], [
+        'nav' => 3,
+        'title' => rand(100, 999),
+        'bodycontent' => '123123123123123123content',
+        'mtime' => time()
+      ], [
+        'nav' => 3,
+        'title' => rand(100, 999),
+        'bodycontent' => '123123123123123123content',
+        'mtime' => time()
+      ], [
+        'nav' => 3,
+        'title' => rand(100, 999),
+        'bodycontent' => '123123123123123123content',
+        'mtime' => time()
+      ], [
+        'nav' => 3,
+        'title' => rand(100, 999),
+        'bodycontent' => '123123123123123123content',
+        'mtime' => time()
+      ], [
+        'nav' => 3,
+        'title' => rand(100, 999),
+        'bodycontent' => '123123123123123123content',
+        'mtime' => time()
+      ], [
+        'nav' => 3,
+        'title' => rand(100, 999),
+        'bodycontent' => '123123123123123123content',
+        'mtime' => time()
+      ], [
+        'nav' => 3,
+        'title' => rand(100, 999),
+        'bodycontent' => '123123123123123123content',
+        'mtime' => time()
+      ]
+
+    ];
+
+    //$result=$this->NewsModel->inserMulti($multidata,'bb');
+
+
+
+
+    /* $newdata=['title'=>'songsong'];
+     $result=$this->NewsModel->update(3,$newdata,'bb');*/
+
+
+    //$result=$this->NewsModel->getOne(10,[],'bb');
+
+
+    //$result=$this->NewsModel->del(44,'bb');
+  /*$newModel=$this->NewsModel;
+   $result = $newModel->getListPage([
+      'id' => [
+        'val' => 30,
+        'operator' => '>=',
+        'condition' => 'and'
+      ],
+      'title'=>['val'=>'386']
+    ], ['*'], 1, 3, '','bb');
+    P($result);*/
+
+    $newModel=$this->NewsModel;
+    $result = $newModel->getListPage([
+      'id' => [
+        'val' => 30,
+        'operator' => '>=',
+        'condition' => 'and'
+      ]
+    ], ['*'], 1, 3, '','bb');
+    P($result);
+
+    //$result=$this->NewsModel->getLastQuery();
+
+
+   /* P(spl_object_id($newModel));
+    P(spl_object_id($this->NewsModel));
+
+    P($this->NewsModel);*/
+
+    /*$sqls=$this->NewsModel->getSqls();
+
+    Pv($sqls);*/
+
+
+    //P($this->NewsModel->getLasqQuery());
+
+    $result=$this->NewsModel->query('select * from bb where id >? order by id desc limit 3',[30]);
+    P($result);
+
+
+    exit;
+
+
     /* $model=new SampleModel();
      $model->selectSample();*/
     $this->SampleModel->selectSample();
@@ -20,12 +145,13 @@ class IndexController extends BaseController {
     //$this->_setCookie('vv',$arr);
 
     //$this->_setCookie('user','james');
-    $this->_delCookie('vv');
+    //$this->_delCookie('vv');
 
-    P($this->_getCookie('vv'));
+    //P($this->_getCookie('vv'));
     //var_dump($this->_getCookie('user'));
 
-    $this->assign('user', 'james');
+    //$this->assign('user', 'james');
+
     $this->getView()->display('/index/detail.html');
     //echo $this->_render('/index/detail.html');
 

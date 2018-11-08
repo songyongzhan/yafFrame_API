@@ -58,3 +58,5 @@ define('ERROR_FILENAME', 'error_general.php');
 define('EXCEPTION_FILENAME', 'exception_general.php');
 
 define('PREFIX', 'api_'); //设置时，前缀是app_
+
+define('PAGESIZE', 10);
