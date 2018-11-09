@@ -12,6 +12,23 @@ class IndexController extends BaseController {
   public function detailAction() {
 
 
+    //url
+
+    //http://k.yt99.com/article/thumb/201809/20/thumb_1015395ba302cb024232ataQm.jpg!94
+    //$this->newsModel->geturl("/article/thumb/201809/20/thumb_1015395ba302cb024232ataQm.jpg!94");
+
+
+    //https://k.yt99.com/6c15947fe2ca9ed96ee79d72cb2a67f9/5be4ead6/article/201809/06/1142265b90a22286ec6oolIJP.gif
+    $this->newsModel->geturl('/79650cb757f844ab8af5e69cbc8af494/5be4f9cd/article/201809/06/1142265b90a22286ec6oolIJP.gif');
+
+
+
+
+    P($this->newsModel->getResponseHeaders());
+
+    //P($this->newsModel->getRequestHeaders());
+    exit;
+
     $data = [
       'nav' => 3,
       'title' => '321',
@@ -19,7 +36,7 @@ class IndexController extends BaseController {
       'mtime' => time()
     ];
 
-    $result=$this->NewsModel->insert($data,'bb');
+    $result=$this->newsModel->insert($data,'bb');
 
 
 

@@ -210,7 +210,14 @@ class BaseModel extends CoreModel {
     return $data;
   }
 
-  public function query($sql, $params = []) {
+  /**
+   * 支持执行sql语句
+   * @param string $sql sql中需要带问号的语句
+   * @param array $params 数组 与sql 中问号一一对应
+   * @return array
+   * @throws InvalideException
+   */
+  public function query($sql, $params) {
     if (empty($sql)) throw new InvalideException('sql param error.', 500);
     $result = $this->_db->rawQuery($sql, $params);
     $this->_querySqls[] = $this->getLasqQuery();
@@ -225,6 +232,10 @@ class BaseModel extends CoreModel {
     return $this->_querySqls;
   }
 
+  /**
+   * 放回当前处理的url
+   * @return string
+   */
   public function getLasqQuery() {
     return $this->_db->getLastQuery();
   }

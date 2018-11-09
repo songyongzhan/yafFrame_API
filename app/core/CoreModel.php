@@ -10,10 +10,14 @@
 class CoreModel {
 
 
-
   protected $_host = NULL;
   //private   $_curl      = NULL;
   private $_multipart = FALSE;
+
+  /**
+   * @var Curl;
+   */
+  private $_curl;
 
 
   public final function __construct() {
@@ -28,6 +32,32 @@ class CoreModel {
 
   }
 
+
+  /**
+   * 不要处理json 我是采集适用的，返回什么就原样返回
+   * @param $url
+   * @param $data
+   * @param string $method
+   */
+  public function send($url, $data = [], $method = 'GET', $multipart = FALSE) {
+    $this->_multipart = $multipart;
+
+    return $this->_fetchEx($url, $data, $method, $this->_multipart, TRUE);
+  }
+
+  /**
+   * 发送get请求 返回的时候，直接进行了json封装
+   * @param $url
+   * @param $data
+   * @param bool $multipart
+   * @return array|false|mixed|string
+   */
+  public function fetchGet($url, $data, $multipart = FALSE) {
+    $this->_multipart = $multipart;
+
+    return $this->_fetch($url, $data, 'GET');
+  }
+
   public function fetchPost($url, $data, $multipart = FALSE) {
     $this->_multipart = $multipart;
 
@@ -35,24 +65,19 @@ class CoreModel {
   }
 
   private function _fetch($url, $data, $method) {
-
     if (FETCH_DUMMY) {
       //去查找json文件，直接返回
-
       $file = str_replace('/', '_', trim($url, '/')) . '.json';
       if (is_file($file = APP_PATH . DS . 'data/json/' . $file)) {
         return $this->_fetchDummy($file, $data);
       }
-
       debugMessage('接口文件不存在. [' . $file . ']');
-
-
     }
 
     return $this->_fetchEx($url, $data, $method, $this->_multipart);
   }
 
-  private function _fetchEx($url, $data, $method, $multiple) {
+  private function _fetchEx($url, $data, $method, $multiple, $collection = FALSE) {
     isset($this->_curl) || $this->_initCurl($url = $this->_parseUrl($url));
 
     //isset($this->_curl) || $this->_curl = new Curl();
@@ -77,10 +102,10 @@ class CoreModel {
     $time_begin = microtime(TRUE);
     switch (strtoupper($method)) {
       case 'GET':
-        $result = $this->_curl->getJson($url, $result);
+        $result = $collection ? $this->_curl->get($url, $result) : $this->_curl->getJson($url, $result);
         break;
       case 'POST':
-        $result = $this->_curl->postJson($url, $result, $this->_multipart);
+        $result = $collection ? $this->_curl->post($url, $result, $this->_multipart) : $this->_curl->postJson($url, $result, $this->_multipart);
         break;
       default:
         show_error('method error.');
@@ -109,11 +134,9 @@ class CoreModel {
 
   }
 
-
   public function setHost($host = REMOTE_HOST) {
     $this->_host = $host;
   }
-
 
   public function setRequestHeader($header) {
     isset($this->_curl) || $this->_initCurl();
@@ -131,6 +154,35 @@ class CoreModel {
     isset($this->_curl) || $this->_initCurl();
 
     $this->_curl->setProxy($address, $port);
+  }
+
+
+  /*
+   * 返回访问curl Response header头信息
+   */
+  public function getResponseHeaders() {
+
+    return $this->_curl->getResponseHeaders();
+  }
+
+  /**
+   * 返回request请求时的header头
+   * @return array
+   */
+  public function getRequestHeaders() {
+    return $this->_curl->getReqeustHeaders();
+  }
+
+  /**
+   * 设置curlcookie
+   * @param $key
+   * @param $val
+   * @throws InvalideException
+   */
+  public function setCookie($key, $val) {
+    if (empty($key) || empty($val))
+      throw new InvalideException('setCookie params error.', 500);
+    $this->_curl->setCookie($key, $val);
   }
 
   /**
@@ -212,7 +264,7 @@ class CoreModel {
   }
 
   private function _initCurl($url = '') {
-    isset($this->_curl) || $this->_curl = new Curl();
+    is_null($this->_curl) && $this->_curl = new Curl();
     if (substr($url, 0, 6) === 'https:') {
       $this->_curl->setOptions([CURLOPT_SSL_VERIFYPEER => 0, CURLOPT_SSL_VERIFYHOST => 0]);
     }

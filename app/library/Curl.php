@@ -23,9 +23,11 @@ class Curl {
   private $_curl;
   private $_error;
   private $_code;
-  private $_reqHeaders = []; //request
-  private $_resHeaders = ''; //response
+  private $_reqHeaders              = []; //request
+  private $_resHeaders              = ''; //response
   private $_response;
+  private $_cookies;
+  private $response_header_continue = FALSE;
 
   public static function isLoadExt() {
     return extension_loaded('curl');
@@ -38,6 +40,7 @@ class Curl {
   public function __construct(array $defaultOptions = []) {
     $this->_curl = curl_init();
 
+    $this->setOption(CURLOPT_HEADERFUNCTION, [$this, 'addResponseHeaderLine']);
     empty($defaultOptions) || $this->_options = $defaultOptions;
   }
 
@@ -53,8 +56,48 @@ class Curl {
     $this->_options[$key] = $value;
   }
 
+  public function setCookie($key, $val) {
+    $this->_cookies[$key] = $val;
+    $this->setOption(CURLOPT_COOKIE, http_build_query($this->_cookies, '', '; '));
+  }
+
   public function setOptions(array $data) {
     $this->_options = array_replace($this->_options, $data);
+  }
+
+  public function addResponseHeaderLine($curl, $header_line) {
+    $trimmed_header = trim($header_line, "\r\n");
+
+    if ($trimmed_header === "") {
+      $this->response_header_continue = FALSE;
+    } else if (strtolower($trimmed_header) === 'http/1.1 100 continue') {
+      $this->response_header_continue = TRUE;
+    } else if (!$this->response_header_continue) {
+      $this->response_headers[] = $trimmed_header;
+    }
+
+    return strlen($header_line);
+  }
+
+  public function getResponseHeaders($headerKey = NULL) {
+    $headers = [];
+    $headerKey = strtolower($headerKey);
+    if (isset($this->response_headers)) {
+      foreach ($this->response_headers as $header) {
+        $parts = explode(":", $header, 2);
+
+        $key = isset($parts[0]) ? $parts[0] : NULL;
+        $value = isset($parts[1]) ? $parts[1] : NULL;
+
+        $headers[trim(strtolower($key))] = trim($value);
+      }
+    }
+
+    if ($headerKey) {
+      return isset($headers[$headerKey]) ? $headers[$headerKey] : FALSE;
+    }
+
+    return $headers;
   }
 
   public function setHeader(array $data) {
@@ -131,9 +174,8 @@ class Curl {
         $data : http_build_query($data);
 
       is_array($this->_options[CURLOPT_POSTFIELDS])
-        && $this->setHeader(['Content-Type' => 'multipart/form-data']);
-    }
-    else $this->_options[CURLOPT_POSTFIELDS] = $data;
+      && $this->setHeader(['Content-Type' => 'multipart/form-data']);
+    } else $this->_options[CURLOPT_POSTFIELDS] = $data;
 
     return $this->request([CURLOPT_URL => $url, CURLOPT_CUSTOMREQUEST => 'POST']);
   }
@@ -156,6 +198,7 @@ class Curl {
     }
 
     $headers = curl_getinfo($this->_curl); //CURLINFO_HEADER_SIZE
+
     isset($headers['http_code']) && $this->_code = $headers['http_code'];
 
     if (isset($this->_options[CURLOPT_HEADER]) && $this->_options[CURLOPT_HEADER] == 1) {
@@ -174,8 +217,7 @@ class Curl {
           if (is_array($item)) { //基本文件服务  Seaweed-FS
             $filepath = $item[0]; //上传文件
             isset($item[1]) && $filename = $item[1]; //目标位置
-          }
-          else $filepath = $item;
+          } else $filepath = $item;
 
           if ($filepath[0] === '@') { //上传文件
             if ($filepath = realpath(ltrim($filepath, '@'))) {
@@ -186,8 +228,7 @@ class Curl {
               $result = TRUE;
 
               continue;
-            }
-            else throw new InvalidArgumentException('file is not a valid.');
+            } else throw new InvalidArgumentException('file is not a valid.');
           }
         }
 
@@ -230,7 +271,7 @@ class Curl {
     //if (ENVIRONMENT !== 'production') $log[] = '调用文件 ' . getCallerFromTrace();
 
     $log[] = '接口地址 ' . $url . (ENVIRONMENT === 'production' && !isLocalhost() ? '' :
-      ' [' . gethostbyname(parse_url($url, PHP_URL_HOST)) . ']');
+        ' [' . gethostbyname(parse_url($url, PHP_URL_HOST)) . ']');
     $log[] = '浏览器头 ' . $_SERVER['HTTP_USER_AGENT'];
     $log[] = '头部参数 ' . json_encode($this->getOption(CURLOPT_HTTPHEADER) ?: [], JSON_UNESCAPED_UNICODE);
     $log[] = '请求参数 ' . $data . ' [' . $this->getOption(CURLOPT_CUSTOMREQUEST) . ']';
