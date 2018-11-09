@@ -19,7 +19,8 @@ class IndexController extends BaseController {
 
 
     //https://k.yt99.com/6c15947fe2ca9ed96ee79d72cb2a67f9/5be4ead6/article/201809/06/1142265b90a22286ec6oolIJP.gif
-    $this->newsModel->geturl('/79650cb757f844ab8af5e69cbc8af494/5be4f9cd/article/201809/06/1142265b90a22286ec6oolIJP.gif');
+    //$this->newsModel->geturl('/fbb982125724a79e8ef9e7f79a23ed95/5be5234d/article/201809/06/1142275b90a223797bbTvEkFv.gif');
+    $this->newsModel->geturl('/f658a2c48968c591cc0ced92192ae17b/5be52dfa/meiwen/aaez6kgg46qo0u0rx5pwehwf.m4a');
 
 
 
