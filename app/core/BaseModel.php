@@ -211,7 +211,7 @@ class BaseModel extends CoreModel {
   }
 
   /**
-   * 支持执行sql语句
+   * 支持执行sql语句并返回结果
    * @param string $sql sql中需要带问号的语句
    * @param array $params 数组 与sql 中问号一一对应
    * @return array
@@ -222,6 +222,20 @@ class BaseModel extends CoreModel {
     $result = $this->_db->rawQuery($sql, $params);
     $this->_querySqls[] = $this->getLasqQuery();
     return $result;
+  }
+
+  /**
+   * 返回影响的条数
+   * @param string $sql sql中需要带问号的语句
+   * @param array $params 数组 与sql 中问号一一对应
+   * @return string
+   * @throws InvalideException
+   */
+  public function exec($sql, $params) {
+    if (empty($sql)) throw new InvalideException('sql param error.', 500);
+    $this->_db->rawQuery($sql, $params);
+    $this->_querySqls[] = $this->getLasqQuery();
+    return $this->_db->count;
   }
 
   /**
