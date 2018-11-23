@@ -217,7 +217,7 @@ class BaseModel extends CoreModel {
    * @return array
    * @throws InvalideException
    */
-  public function query($sql, $params) {
+  public function query($sql, $params = []) {
     if (empty($sql)) throw new InvalideException('sql param error.', 500);
     $result = $this->_db->rawQuery($sql, $params);
     $this->_querySqls[] = $this->getLasqQuery();
@@ -231,7 +231,7 @@ class BaseModel extends CoreModel {
    * @return string
    * @throws InvalideException
    */
-  public function exec($sql, $params) {
+  public function exec($sql, $params = []) {
     if (empty($sql)) throw new InvalideException('sql param error.', 500);
     $this->_db->rawQuery($sql, $params);
     $this->_querySqls[] = $this->getLasqQuery();

@@ -36,7 +36,8 @@ class Bootstrap extends CoreBootstrap {
   public function _initDatabase(Yaf_Dispatcher $dispatcher) {
     if (!DB_INIT_FLAG) return FALSE;
     $dbconfig = Tools_Config::getConfig('db.mysql');
-    $db = new MysqliDb($dbconfig);
+    require APP_PATH . DS . 'app/core/CoreMysqliDb.php';
+    $db = new CoreMysqliDb($dbconfig);
     //$db->setQueryOption([MYSQLI_OPT_INT_AND_FLOAT_NATIVE => TRUE]);
     Yaf_Registry::set('db', $db);
   }
