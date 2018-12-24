@@ -33,15 +33,33 @@ switch (ENVIRONMENT) {
     define('RESTHUB_CLIENT_PRIVKEY',
       'MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAKfP2gYBvfVXTX/dOXGJJSvIFexooRqw3BBfdkMoBiEJfjCToWFqIyUDEowDFpUfVZ2Yc0tCZqrryS2KISZtc+QQozIG662lXyZ6hAM/r+L2KUOKMFxNJQm8d3UeSDO5lxM9d0DrG7TNWTZf1+nUDljhoJGyRcExWo980jqsedefAgMBAAECgYEAgmWbp+FAp10AZqQTl+qWzK98gahHz4KwbbSQI9z87jz/JmYBF74usvrxNYTMznF7yKsGo+tj9dqkB9P2sHKKguAN4fyCJIFYzHj23ph23vyxYbR7aA+lD51fXovoD/P39EixKXWdDYl7RTb9jCCrdfJ6HglVMSga/1iXhYBnPmkCQQDptb9+EI97ofRsiIaEi3jWE6B//8hrd7sggcYq+taEfVfdjQhE7lFTeTgfEt/tH/pPY7D06imyvNZYTiZ7KBKlAkEAt9Ej4VNRgFe59z5X8Rb0ewqM4vGC3rNMRkZJZ1KDL66PXr3MAwIisMAsfXOpN3iEskJs1HIVy+aDDJVCvO+B8wJAF6LN7w31tOc4NRHJqPYCDoSFouxXdKbzQeJeDFK6B0Q18q4ku/PuPabwyhO6mdy2D/lhGCPme7ElbGDa+3GeEQJAWdzFhLd9xZedk3CH/5XwSWKcA6p8BzFyXXypD/j3p0zYTEHPRb06hlw8o8vycurZPGha2fU4EKmNcY5axRD13wJAa0aoGwXthEc2mzmkn5tvnWRhgofR0yqBrcHSKl3NlkAHFL1t+P8X53hDyfs/V7IESOlxlJXuxysSPjTVedV4Jw==');
 
+    
+
+
+
     break;
   case 'testing': //测试配置文件
+
+
+
+
+
+
 
     define('REMOTE_HOST', 'http://sit1-apis.qianbao.com');
     break;
   case 'product': //生产配置文件
 
-    define('REMOTE_HOST', '');
 
+
+
+
+
+
+
+
+
+    define('REMOTE_HOST', '');
     break;
 }
 

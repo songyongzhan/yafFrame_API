@@ -10,7 +10,7 @@
 
 class StatusCode {
 
-  const MESSAGE_CODE = 2000;
+  const MESSAGE_CODE = 200000000;
 
 
   /**
@@ -21,7 +21,7 @@ class StatusCode {
   public static function get_code_message($code) {
 
     $data = [
-      2000 => '信息码错误'
+      200000000 => '信息码错误'
     ];
 
     return isset($data[$code]) ? $data[$code] : '';
