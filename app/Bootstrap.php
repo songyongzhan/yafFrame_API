@@ -38,6 +38,17 @@ class Bootstrap extends CoreBootstrap {
     $dbconfig = Tools_Config::getConfig('db.mysql');
     require APP_PATH . DS . 'app/core/CoreMysqliDb.php';
     $db = new CoreMysqliDb($dbconfig);
+
+    Yaf_Registry::has('initConfig') || $this->initConfig();
+
+    $initConfig = Yaf_Registry::get('initConfig');
+
+    $dbConnections = $initConfig->get('db')->toArray();
+
+    foreach ($dbConnections as $dbSlaveName => $dbSlave) {
+      if ($dbSlave['enable'])
+        $db->addConnection($dbSlaveName, $dbSlave);
+    }
     //$db->setQueryOption([MYSQLI_OPT_INT_AND_FLOAT_NATIVE => TRUE]);
     Yaf_Registry::set('db', $db);
   }

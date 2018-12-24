@@ -22,6 +22,20 @@ return [
     'CommonLog' => 'CommonLog', //公共Log 日志
     'InitException' => 'InitException',
     'ApiDispatch' => 'ApiDispatch',
+  ],
+
+
+  'db' => [
+    'slave1' => [
+      'host' => '172.28.66.198',
+      'username' => 'root',
+      'password' => 'song',
+      'db' => 'test',
+      'port' => 3306,
+      'prefix' => '',
+      'charset' => 'utf8',
+      'enable' => TRUE
+    ]
   ]
 
 

@@ -12,7 +12,6 @@ class StatusCode {
 
   const MESSAGE_CODE = 200000000;
 
-
   /**
    * 如果信息码存在，返回信息，如果不存在返回空
    * @param $code

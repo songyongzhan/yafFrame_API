@@ -14,13 +14,26 @@ class UserController extends ApiBaseController {
     return $data;
   }
 
+  public function jfAction(){
+
+    $data=$this->userService->jf();
+
+    print_r($data);
+    exit;
+    exit;
+
+
+  }
   public function indexAction() {
 
-    $data = $this->UserService->index('james', '123', '2', 'ff');
+
+    echo 1111;
+    exit;
+   /* $data = $this->UserService->index('james', '123', '2', 'ff');
 
     P($data);
 
-    exit;
+    exit;*/
 
   }
 

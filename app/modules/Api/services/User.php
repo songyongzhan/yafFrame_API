@@ -57,5 +57,12 @@ class UserService extends BaseService {
 
   }
 
+  public function jf() {
+
+    $data=$this->userModel->jf();
+    return $this->show($data);
+
+  }
+
 
 }

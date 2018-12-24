@@ -19,8 +19,7 @@ class CoreBootstrap extends Yaf_Bootstrap_Abstract {
     Yaf_Registry::set('config', $arrConfig);
 
     //register initconfig
-    $initConfig = new Yaf_Config_Simple(require_once APP_CONFIG_PATH . DS . 'initConfig.php');
-    Yaf_Registry::set('initConfig', $initConfig);
+    Yaf_Registry::has('initConfig') || $this->initConfig();
   }
 
   /**
@@ -36,6 +35,7 @@ class CoreBootstrap extends Yaf_Bootstrap_Abstract {
     //注册插件
     $initConfig = Yaf_Registry::get('initConfig');
     $plugins = $initConfig->get('plugins')->toArray();
+
     foreach ($plugins as $field => $class) {
       $class = ucfirst($class);
       $file = APP_PATH . DS . 'app/plugins/' . $class . '.' . Tools_Config::getConfig('application.ext');
@@ -45,5 +45,12 @@ class CoreBootstrap extends Yaf_Bootstrap_Abstract {
     }
   }
 
+  /**
+   * 不会被系统直接调用
+   */
+  protected function initConfig(){
+    $initConfig = new Yaf_Config_Simple(require_once APP_CONFIG_PATH . DS . 'initConfig.php');
+    Yaf_Registry::set('initConfig', $initConfig);
+  }
 
 }

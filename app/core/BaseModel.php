@@ -74,7 +74,7 @@ class BaseModel extends CoreModel {
     is_null($table) || $this->table = $table;
     $ids = $this->_db->insertMulti($this->table, $data);
     $this->_querySqls[] = $this->getLasqQuery();
-    if (!ids)
+    if (!$ids)
       return FALSE;
     else
       return implode(',', $ids);
@@ -177,7 +177,6 @@ class BaseModel extends CoreModel {
           $this->_db->where($key, $val['val'], isset($val['operator']) ? $val['operator'] : '=', isset($val['condition']) ? $val['condition'] : 'AND');
         else
           $this->_db->where($key, $val);
-
       }
     }
   }
@@ -254,5 +253,48 @@ class BaseModel extends CoreModel {
     return $this->_db->getLastQuery();
   }
 
+  /**
+   * 开启数据库事务
+   */
+  public function startTransaction() {
+    return $this->_db->startTransaction();
+  }
+
+  /**
+   * 回滚事务
+   * @return bool
+   */
+  public function rollback() {
+    return $this->_db->rollback();
+  }
+
+  /**
+   * 提交事务
+   * @return bool
+   */
+  public function commit() {
+    return $this->_db->commit();
+  }
+
+  public function chooseConnection($name) {
+    return $this->_db->connection($name);
+  }
+
+  /**
+   * 开启sql调试
+   * @param bool $enable
+   * @param null $stripPrefix
+   */
+  public function startTrace($enable = TRUE, $stripPrefix = NULL) {
+    $this->_db->setTrace($enable, $stripPrefix);
+  }
+
+  /**
+   * 获取调试信息
+   * @return array
+   */
+  public function getTrace() {
+    return $this->_db->trace;
+  }
 
 }

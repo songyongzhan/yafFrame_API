@@ -13,20 +13,19 @@ class UserModel extends BaseModel {
     return Rsa::Encrypt($data, RESTHUB_SERVER_PUBLIC);
   }
 
+  public function jf() {
+
+    //return $this->chooseConnection('db1')->getList([],[],'','jf_role');
+    return $this->chooseConnection('slave1')->get('jf_role');
+
+
+
+    //return [];
+
+  }
+
   protected function _Decrypt($data) {
     return Rsa::Decrypt($data, RESTHUB_CLIENT_PRIVKEY);
-  }
-
-  protected function init() {
-
-  }
-
-  public function add() {
-
-  }
-
-  public function del() {
-
   }
 
 
