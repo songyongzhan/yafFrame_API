@@ -2,8 +2,8 @@
 ## Folders                  ##
 ##############################
 .idea
-/data/logs/*.php
-/data/cache/*.php
+/data/logs
+/data/cache
 vendor
 
 #忽略日志文件
