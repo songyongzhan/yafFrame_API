@@ -28,8 +28,8 @@ return [
   'db' => [
     'slave1' => [
       'host' => '172.28.66.198',
-      'username' => 'root',
-      'password' => 'song',
+      'username' => 'song',
+      'password' => '123',
       'db' => 'test',
       'port' => 3306,
       'prefix' => '',
