@@ -4,18 +4,19 @@
  * User: songyongzhan
  * Date: 2018/10/23
  * Time: 13:41
- * Email: songyongzhan@qianbao.com
+ * Email: 574482856@qq.com
  */
 
 class ProxyModel {
 
-  public static  $_object          = [];
-  private        $_rule            = [];//验证规则
-  private        $_instance        = NULL;
-  private        $_classname       = NULL;
-  private        $_cachePath       = APP_PATH . DS . 'data/cache/validate';
-  private static $_validateContent = NULL;
+  public static $_object          = [];
+  private       $_rule            = [];//验证规则
+  private       $_instance        = NULL;
+  private       $_classname       = NULL;
+  private       $_cachePath       = APP_PATH . DS . 'data/cache/validate';
+  private       $_validateContent = NULL;
   const IGNORE = ['BaseModel'];
+  const VALIDATE = 'service'; //只是过滤service
 
   public function __construct($obj, $name = NULL) {
     $this->_classname = is_null($name) ? get_class($obj) : $name;
@@ -26,8 +27,8 @@ class ProxyModel {
 
 
   public final function __get($name) {
-    if (!isset($this->_instance->$name))
-      throw new Exceptions('Undefined property:' . $name . ' not found exists.');
+    if (!property_exists($this->_instance, $name))
+      debugMessage(get_class($this->_instance) . ' property [ ' . $name . ' ] is not found.');//throw new Exceptions('Undefined property:' . $name . ' not found exists.');
 
     return $this->_instance->$name;
   }
@@ -39,36 +40,35 @@ class ProxyModel {
 
   public function __call($method, $params) {
 
-    if ($method[0] !== '_' && method_exists($this->_instance, $method)) {
-      ENVIRONMENT === 'devlop' && logMessage('debug', '自动验证:' . $this->_classname . '->' . $method . '() 参数:' . jsonencode($params));
+    if ($method[0] !== '_' && method_exists($this->_instance, $method) && strpos(strtolower(get_class($this->_instance)), self::VALIDATE)) {
+
+      ENVIRONMENT == 'develop' && debugMessage('develop自动验证:' . $this->_classname . '->' . $method . '() 参数:' . jsonencode($params));
+
       $reflection = new Reflec($this->_instance);
+
       $validateFile = $this->_cachePath . DS . 'form_' . $this->_classname . '.' . Tools_Config::getConfig('application.ext');
 
       if (file_exists($validateFile) && (filemtime($validateFile) > $reflection->getFileTime())) {
-        is_null(self::$_validateContent) && self::$_validateContent = require_once $validateFile;
-        $this->_rule = self::$_validateContent;
+
+        is_null($this->_validateContent) && $this->_validateContent = require $validateFile;
+
+        $this->_rule = $this->_validateContent;
+
       } else {
         $this->_rule = $this->_makeFile($reflection, $validateFile);
       }
 
       if (!is_array($rules = $this->_rule))
-        throw new Exceptions('$this->_rule is not Array.', 500);
+        throw new Exceptions('$this->_rule is not Array.', StatusCode::RULE_NOT_ARRAY);
 
       //如果最后一个参数是数组，则和其他参数合并在一起
       if (isset($rules['rules'][$method]) && ($methodRules = $rules['rules'][$method])) {
 
         $data = $this->_combineParam($rules['params'][$method], $params);
-        if (TRUE !== ($result = validate($methodRules, $data, $rules['msg'][$method]))) {
+
+        if (($result = validate($methodRules, $data, $rules['msg'][$method])) && is_array($result)) {
           showApiException($result['errMsg']);
         }
-        /* P($methodRules);
-        $msg = $rules['msg'][$method];
-        $validate = new Validate($methodRules, $msg);
-        $result = $validate->check($this->_combineParam($rules['params'][$method], $params));
-        P($msg);
-        P($this->_combineParam($rules['params'][$method], $params));
-        P($result, 'var_dump');
-        P($validate->getError());*/
 
       }
     }

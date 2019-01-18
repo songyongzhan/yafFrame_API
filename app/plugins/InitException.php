@@ -4,7 +4,7 @@
  * User: songyongzhan
  * Date: 2018/10/19
  * Time: 15:09
- * Email: songyongzhan@qianbao.com
+ * Email: 574482856@qq.com
  */
 
 
@@ -22,6 +22,10 @@ class InitExceptionPlugin extends Yaf_Plugin_Abstract {
     $old_exception = set_exception_handler(NULL);
 
     set_exception_handler(function ($exception) use ($old_exception) {
+
+      //处理我们的异常信息 在这里可以根据环境替换StatusCode
+
+
 
       $old_exception && $old_exception($exception);
 

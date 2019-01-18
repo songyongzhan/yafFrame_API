@@ -79,6 +79,7 @@ class Validate {
   // 验证字段描述
   protected $field = [];
 
+  //使用文档 https://www.kancloud.cn/manual/thinkphp5/129356
   // 验证规则默认提示信息
   protected static $typeMsg = [
     'require' => ':attribute require',
@@ -129,6 +130,7 @@ class Validate {
     'fileSize' => 'filesize not match',
     'fileExt' => 'extensions to upload is not allowed',
     'fileMime' => 'mimetype to upload is not allowed',
+    'mobile' => ':attribute not a valid mobile'
   ];
 
   // 当前验证场景
@@ -172,6 +174,12 @@ class Validate {
       self::$instance = new self($rules, $message, $field);
     }
     return self::$instance;
+  }
+
+  public function reset() {
+    $this->rule = [];
+    $this->message = [];
+    return $this;
   }
 
   /**
@@ -582,6 +590,24 @@ class Validate {
   protected function lt($value, $rule, $data) {
     $val = $this->getDataValue($data, $rule);
     return !is_null($val) && $value < $val;
+  }
+
+
+  /**
+   * 验证是不是手机手机号
+   * @access protected
+   * @param mixed $value 字段值
+   * @param mixed $rule 验证规则
+   * @param array $data 数据
+   * @return bool
+   */
+  protected function mobile($value, $rule, $data) {
+    if ($value === "")
+      return TRUE;
+
+    $rules = '/^1[0-9]{10}$/';
+
+    return preg_match($rules, $value) ? TRUE : FALSE;
   }
 
   /**
@@ -1356,7 +1382,7 @@ class Validate {
     if (method_exists($class, $method)) {
       return call_user_func_array([$class, $method], $params);
     } else {
-      throw new \BadMethodCallException('method not exists:' . __CLASS__ . '->' . $method);
+      throw new BadMethodCallException('method not exists:' . __CLASS__ . '->' . $method);
     }
   }
 }

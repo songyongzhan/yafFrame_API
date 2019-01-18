@@ -39,12 +39,13 @@ class Rsa {
     return $result;
   }
 
+
   private function _decrypt($data) {
     $result = '';
     if ($data) {
       foreach (str_split($data, 128) as $chunk) {
-        if (!openssl_private_decrypt($chunk, $decrypted, $this->_privkey))
-            throw new Exception('Unable to decrypt data.');
+        if (!openssl_private_decrypt($chunk, $decrypted, $this->_privkey, OPENSSL_PKCS1_PADDING))
+          throw new Exception('Unable to decrypt data.');
 
         $result .= $decrypted;
       }
@@ -53,28 +54,16 @@ class Rsa {
     return $result;
   }
 
-  public static function Encrypt($data, $pubkey = '') {
+  public static function Encrypt($data, $pubkey = '', $url_safe = FALSE) {
     $_self = self::getInstance($pubkey, '');
-
-    return base64_encode($_self->_encrypt($data));
+    $data = base64_encode($_self->_encrypt($data));
+    return $url_safe ? strtr($data, '+/', '-_') : $data;
   }
 
-  public static function Decrypt($data, $privkey = '') {
+  public static function Decrypt($data, $privkey = '', $url_safe = FALSE) {
     $_self = self::getInstance('', $privkey);
 
-    return $_self->_decrypt(base64_decode($data));
-  }
-
-  public static function hexEncrypt($data, $pubkey = '') {
-    $_self = self::getInstance($pubkey, '');
-
-    return bin2hex($_self->_encrypt($data));
-  }
-
-  public static function hexDecrypt($data, $privkey = '') {
-    $_self = self::getInstance('', $privkey);
-
-    return $_self->_decrypt(hex2bin($data)); //pack('H*', $data)
+    return $_self->_decrypt(base64_decode($url_safe ? strtr($data, '-_', '+/') : $data));
   }
 
 }

@@ -4,7 +4,7 @@
  * User: songyongzhan
  * Date: 2018/10/23
  * Time: 10:35
- * Email: songyongzhan@qianbao.com
+ * Email: 574482856@qq.com
  */
 
 class  ApiException extends Exceptions {

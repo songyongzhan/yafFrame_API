@@ -4,8 +4,10 @@
  * User: songyongzhan
  * Date: 2018/10/17
  * Time: 14:11
- * Email: songyongzhan@qianbao.com
+ * Email: 574482856@qq.com
  */
+
+date_default_timezone_set('PRC');
 require_once APP_PATH . DIRECTORY_SEPARATOR . 'app/configs/api.php';
 /*foreach (glob(__DIR__ . '/*.php') as $file) {
   if ($file != __FILE__)
@@ -44,6 +46,17 @@ spl_autoload_register(function ($class) use ($autoload) {
   }
 
 }, TRUE, FALSE);
+
+if (isset($_SERVER['REQUEST_URI'])) {
+  $pattern = '/.*\.(ico|jpg|png|gif|css|js)/i';
+  if (preg_match($pattern, $_SERVER['REQUEST_URI'])) {
+    $server_protocol = isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';
+    header('status:404');
+    header($server_protocol . " 404 No Found.");
+
+    exit;
+  }
+}
 
 //自动加载helpers 文件中指定文件
 foreach ($autoload['helper'] as $filename) {
