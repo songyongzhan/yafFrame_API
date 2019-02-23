@@ -13,7 +13,6 @@ class BaseService extends CoreService {
 
   private static $_object = [];
 
-
   /**
    * 自动初始化
    */

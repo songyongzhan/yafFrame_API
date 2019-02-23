@@ -39,7 +39,7 @@ class RoleaccessService extends BaseService {
    * 返回当前用户可以访问的url
    * @return array
    */
-  public function getRoleMenuApi() {
+  public function getRoleMenuUrls() {
     $roleResult = $this->menuService->getList([], 1);
     $roleResult = $roleResult['result'];
 
@@ -72,8 +72,14 @@ class RoleaccessService extends BaseService {
     $checkUrlData = [];
     foreach ($roleResult as $val) {
 
-      if ($val['relation_url'] != '')
-        $checkUrlData[] = $val['relation_url'];
+      if ($val['relation_url'] != '') {
+
+        foreach (explode(',', $val['relation_url']) as $_u) {
+          $checkUrlData[] = $_u;
+        }
+        
+      }
+
 
       if ($val['type_id'] == 2) {
         if ($val['url'] != '')

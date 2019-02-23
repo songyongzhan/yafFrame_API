@@ -37,6 +37,7 @@ class ManageController extends ApiBaseController {
     $ext = $this->_post('ext', '');
     $remarks = $this->_post('remarks', '');
     $status = $this->_post('status', 0);
+    $login_date = $this->_post('login_date', '');
     $data = [
       'username' => $username,
       'password' => $password,
@@ -49,7 +50,8 @@ class ManageController extends ApiBaseController {
       'remarks' => $remarks,
       'status' => $status,
       'token' => '',
-      'isadmin' => 0
+      'isadmin' => 0,
+      'login_date' => $login_date
     ];
     $result = $this->manageService->add($data);
     return $result;
@@ -82,6 +84,7 @@ class ManageController extends ApiBaseController {
     $email = $this->_post('email', '');
     $mobile = $this->_post('mobile', '');
     $status = $this->_post('status', '');
+    $login_date = $this->_post('login_date', '');
     $id = $this->_post('id');
     $data = [
       'username' => $username,
@@ -93,7 +96,8 @@ class ManageController extends ApiBaseController {
       'mobile' => $mobile,
       'fullname' => $fullname,
       'remarks' => $remarks,
-      'status' => $status
+      'status' => $status,
+      'login_date' => $login_date
     ];
     $result = $this->manageService->update($id, $data);
     return $result;
@@ -221,7 +225,7 @@ class ManageController extends ApiBaseController {
    * 公开化 用于搜索 填充数据使用
    */
   public function searchDataAction() {
-    $type = $this->_post('type','');
+    $type = $this->_post('type', '');
     $result = $this->manageService->searchData($type);
     return $result;
   }
@@ -229,6 +233,43 @@ class ManageController extends ApiBaseController {
   //test
   public function aaAction() {
 
+    //$table=$this->mpinfoService->cloneTmpTable();
+
+
+    //$b=$this->mpinfoModel->getTableInfo('role_copy');
+    //var_dump($b);
+    //
+    //exit;
+    $table = $this->mpinfoModel->cloneTmpTable('role_copy');
+
+    var_dump($table);
+    $this->mpinfoModel->insert([
+      'title' => '123',
+      'remarks' => '',
+      'status' => 1
+    ], $table);
+
+
+    $b = $this->mpinfoModel->copyData($table, 'role_copy');
+
+    var_dump($b);
+
+    exit;
+
+    //var_dump($table);
+    //$this->redisModel->copyData('logs');
+
+    //$this->ydylareachinaService->createTemporaryTable();
+    //
+    //
+    //$this->ydylareachinaService->fillTemporaryTable(3);
+
+
+    //$r=$this->ydylareachinaService->getList([]);
+    //print_r($r);
+
+
+    exit;
     //var_dump($this->_post('username'));
     //
     //var_dump($_POST);

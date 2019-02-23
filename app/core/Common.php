@@ -623,7 +623,7 @@ if (!function_exists('validate')) {
     empty($data) && show_error('Validation data can not be empty.');
     strlen(implode('', array_values($msg))) === 0 && $msg = [];
 
-    $validate=Validate::make()->reset()->rule($rules)->message($msg);
+    $validate = Validate::make()->reset()->rule($rules)->message($msg);
     //$validate = new Validate($rules,$msg);
     if ($validate->check($data)) {
       return TRUE;
@@ -804,6 +804,30 @@ function DESDecrypt($data, $key, $urlsafe = FALSE) {
   return $data;
 }
 
+/**
+ * 获取日志记录的数据
+ */
+function getFilterLogData() {
+  $data = [];
+  if (isset($_SERVER['REQUEST_METHOD'])) {
+    switch ($_SERVER['REQUEST_METHOD']) {
+      case 'POST':
+        $data = $_POST;
+        break;
+      case 'GET':
+        $data = $_GET;
+        break;
+      default:
+        $data = $_REQUEST;
+        break;
+    }
+
+
+  }
+
+  return $data;
+
+}
 
 function array_change_value_case_recursive(array $data, $case = CASE_LOWER) {
   foreach ($data as &$item) {

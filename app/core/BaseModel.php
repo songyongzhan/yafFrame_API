@@ -29,7 +29,7 @@ class BaseModel extends CoreModel {
 
   private $_querySqls; //执行过的sql语句
 
-  protected $prefix = ''; //表前缀
+  public $prefix = ''; //表前缀
   /**
    * 创建时间的字段  设置成 protected 在子类中修改
    * @var string
@@ -46,7 +46,7 @@ class BaseModel extends CoreModel {
    * 如果设置true 则所有表中必须包含此字段，否则报错
    * @var bool
    */
-  protected $autoaddtime = DB_AUTOADDTIME;
+  protected $autoaddtime;
 
   protected $output_time_format = FALSE;
   //输入格式，默认为false 则时间戳输出，可以定义 Y-m-d H:i:s 格式化输出
@@ -65,7 +65,9 @@ class BaseModel extends CoreModel {
   protected function _init() {
     $this->_db = Yaf_Registry::has('db') ? Yaf_Registry::get('db') : NULL;
     $this->table = is_null($this->table) ? $this->prefix . strtolower(substr(get_class($this), 0, -5)) : $this->table;
-    $this->autoaddtime = Tools_Config::getConfig('db.mysql.auto_addtime');
+    if (is_null($this->autoaddtime))
+      $this->autoaddtime = Tools_Config::getConfig('db.mysql.auto_addtime');
+
     $this->prefix = Tools_Config::getConfig('db.mysql.prefix');
     if (!$this->output_time_format)
       $this->output_time_format = (defined('DB_AUTOTIME_OUT_FORMAT') && DB_AUTOTIME_OUT_FORMAT) ? DB_AUTOTIME_OUT_FORMAT : FALSE;
@@ -153,12 +155,21 @@ class BaseModel extends CoreModel {
    * @return array
    * @throws InvalideException
    */
-  public final function getList($where, $fileds = [], $order = '', $table = NULL, $maxSize = 1000) {
-    is_null($table) || $this->table = $table;
+  public final function getList($where, $fileds = [], $order = '', $table = NULL, $maxSize = 1000, $group = '') {
+    if ($table) $this->table = $table;
     empty($fileds) && $fileds = '*';
     $this->setCond($where);
     empty($order) && $order = $this->id . ' desc';
     list($orderField, $orderType) = explode(' ', $order);
+
+    //设置group
+    if ($group) {
+      $group = explode(',', trim($group));
+      foreach ($group as $field) {
+        $this->_db->groupBy($field);
+      }
+    }
+
     $this->_db->orderBy($orderField, $orderType);
     $rowNum = [0, abs($maxSize)];
     $maxSize === 0 && $rowNum = NULL;
@@ -220,6 +231,18 @@ class BaseModel extends CoreModel {
     return page_data($result, $this->_db->totalCount, $pageNum, $pageSize, $this->_db->totalPages);
   }
 
+
+  /**
+   * 获取view中的数据
+   * @param $viewName
+   * @param bool $prefix
+   */
+  public function getViewData($viewName, $field = '') {
+    $result = $this->_db->get($viewName, NULL, $field);
+    $this->_logSql();
+    return $result;
+  }
+
   /**
    * 记录并处理sql
    */
@@ -255,7 +278,6 @@ class BaseModel extends CoreModel {
       //  debugMessage('系统自动添加了逻辑删除过滤值 status ');
       //}
 
-
       $this->_db->where('status', -1, '>');
       debugMessage('系统自动添加了逻辑删除过滤值 status ');
     }
@@ -288,11 +310,79 @@ class BaseModel extends CoreModel {
     return $this->_db->tableExists($table);
   }
 
-
-  public final function getTableScnema($table, $filed = '*', $autoAddPrefix = FALSE) {
-    $table = $autoAddPrefix ? $this->prefix . $table : $table;
+  /**
+   * 获取表相关信息
+   * @param $table
+   * @param string $filed
+   * @return mixed
+   */
+  public final function getTableInfo($table, $filed = '*') {
+    $table = strpos($table, '.') ? $table : str_replace($this->prefix, '', $table);
     return $this->_db->getTableScnema($table, $filed);
   }
+
+  /**
+   * 创建临时表
+   * @return bool
+   */
+  public function cloneTmpTable($srcTable = '') {
+    $srcTable = str_replace($this->prefix, '', $srcTable);
+    $srcTable === '' && $srcTable = $this->table;
+
+    $srcTable = $this->prefix . $srcTable;
+
+    $sql = 'CREATE TEMPORARY TABLE %s ENGINE=MyISAM AS SELECT * FROM %s WHERE %s < 0';
+
+    $temporaryTable = $srcTable . time();
+
+    $sql = sprintf($sql, $temporaryTable, $srcTable, $this->id);
+
+    $this->query($sql);
+
+    if ($this->_db->getLastErrno() > 0)
+      return FALSE;
+    else
+      return str_replace($this->prefix, '', $temporaryTable);
+
+  }
+
+  /**
+   * @param $tmpTable
+   * @param string $distTable
+   */
+  public function copyData($tmpTable, $distTable = '') {
+    $tmpTable = str_replace($this->prefix, '', $tmpTable);
+    $distTable = str_replace($this->prefix, '', $distTable);
+
+    if ($distTable === '')
+      $distTable = $this->prefix . $this->table;
+    else
+      $distTable = $this->prefix . $distTable;
+
+    $data = $this->getTableInfo($distTable);
+    if ($data) {
+      $field = array_column($data, 'COLUMN_NAME', 'COLUMN_NAME');
+      unset($field[$this->id]);
+      $field = implode(',', $field);
+    } else
+      $field = NULL;
+
+    if (!$field)
+      return FALSE;
+
+    $sql = sprintf('INSERT INTO %s(%s) select %s from %s', $distTable, $field, $field, $this->prefix . $tmpTable);
+
+    debugMessage('copyData temporary to table Sql:' . $sql);
+
+    $this->query($sql);
+    $this->query(sprintf('DROP TABLE %s', $this->prefix . $tmpTable));
+
+    if ($this->_db->getLastErrno() > 0)
+      return FALSE;
+    else
+      return TRUE;
+  }
+
 
   /**
    * 自动处理添加 createtime  updatetime

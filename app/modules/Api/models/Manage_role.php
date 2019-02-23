@@ -32,10 +32,10 @@ class Manage_roleModel extends BaseModel {
     } else
       $this->_db->where('m.status', '-1', '>');
 
-    $this->_db->where('mr.manage_id', $manage_id);
+    $this->_db->where('mr.manage_id', $manage_id)->where('mr.status', -1, '>');
     $field = array_map(function ($val) {
 
-      if($val==='id')
+      if ($val === 'id')
         return 'DISTINCT m.id';
       else
         return 'm.' . $val;
@@ -44,7 +44,6 @@ class Manage_roleModel extends BaseModel {
 
     $result = $this->_db->get('manage_role mr', NULL, $field);
     $this->_logSql();
-
     return $result;
   }
 

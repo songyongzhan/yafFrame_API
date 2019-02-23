@@ -14,6 +14,7 @@ class Log {
   protected      $file_path  = NULL;
   protected      $log_expire = NULL;
   protected      $file_ext   = NULL;
+  protected      $writed     = FALSE; //是否已经写入过一部分 当数据过大，则写入到文件一部分
 
   public function getEnabled() {
     return $this->_enabled;
@@ -26,6 +27,14 @@ class Log {
   public function write_log($level, $message) {
     if ($this->_enabled !== TRUE) return FALSE;
     self::$messages[] = $this->_formatLine($level, getTime(), is_array($message) ? serialize($message) : $message);
+
+    //若数据量较大，则中途写入到文件一次
+    if (count(self::$messages) > 1000) {
+      $this->write_file(PHP_EOL . ($this->writed ? '' : '<log>') . PHP_EOL . implode('', self::$messages) . PHP_EOL);
+      self::$messages = [];
+      $this->writed = TRUE;
+    }
+
   }
 
   public function write_file($message) {
@@ -109,7 +118,7 @@ class Log {
         __METHOD__ . PHP_EOL . '页面执行 ' . number_format(microtime(TRUE) - $_SERVER['REQUEST_TIME_FLOAT'], 3)
         . (isCli() ? ' [cli run ' . (isset($_SERVER['m_requesturi']) ? $_SERVER['m_requesturi'] : '') . '] ' : ' sec [' . $_SERVER['REQUEST_URI'] . ']'));
 
-      $this->write_file(PHP_EOL . '<log>' . PHP_EOL . implode('', self::$messages) . '</log>' . PHP_EOL);
+      $this->write_file(PHP_EOL . ($this->writed ? '' : '<log>') . PHP_EOL . implode('', self::$messages) . '</log>' . PHP_EOL);
     }
   }
 

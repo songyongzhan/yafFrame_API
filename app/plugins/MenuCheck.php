@@ -17,10 +17,14 @@ class MenuCheckPlugin extends Yaf_Plugin_Abstract {
       $whiteList = [
         'Manage' => ['logout', 'checkToken', 'login', 'password', 'getClientIp', 'searchData', 'getUserInfo', 'password', 'checkCode', 'getCode', 'aa'],
         'Dictionaries' => '*',
+        'Region' => '*',
+        'Ydylarea' => ['getList', 'getChinaList'],
         'Exportdata' => ['createCsv'],
         'Menu' => ['getAppointMenuList', 'getList'],
+        'Pcrdata' => ['getCity', 'getBrand', 'getGrade', 'getSpecification'],
+        'Mppinpai' => ['getListOption'],
         'Reportlist' => ['getListByreport'],
-        'Roleaccess' => ['checkUrl'],
+        'Roleaccess' => ['checkUrl', 'getRoleMenuUrls'],
         //'Menu' => ['getOne']
       ];
 

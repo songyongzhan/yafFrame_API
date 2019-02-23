@@ -25,7 +25,7 @@ class ManageService extends BaseService {
 
   }
 
-  const FIELD = ['id', 'username', 'fullname', 'mobile', 'email', 'timeout', 'status', 'department', 'ext', 'last_logintime', 'remarks', 'updatetime', 'createtime'];
+  const FIELD = ['id', 'username', 'fullname', 'mobile', 'email', 'timeout', 'status', 'department', 'ext', 'login_date', 'last_logintime', 'remarks', 'updatetime', 'createtime'];
 
   /**
    * 用户添加
@@ -116,6 +116,7 @@ class ManageService extends BaseService {
    * @param string $password <require> 密码
    * @param string $code <require> 验证码
    * @return array mixed 返回用户信息
+   * @throws Exception
    */
   public function login($username, $password, $code) {
     if ($code != 0)
@@ -126,6 +127,16 @@ class ManageService extends BaseService {
     unset($loginField['timeout'], $loginField['ext'], $loginField['createtime'], $loginField['updatetime']);
     $result = $this->manageModel->login($username, $password, $loginField);
     if ($result['login']) {
+
+      if (!$result['isadmin']) {
+        //判断时间区间
+        list($startDate, $endDate) = explode('至', $result['login_date']);
+        //如果不在这个范围内，则提醒用户登录时间过期
+        if (!(time() > strtotime(trim($startDate)) && time() < strtotime(trim($endDate)))) {
+          showApiException('登录时间过期或未开通', StatusCode::LOGINDATEEXPIRE);
+        }
+      }
+
       $token = create_token($result['id']);
       $timeout = time() + TOKEN_EXPIRE_LONG;
       //更新token
@@ -159,8 +170,8 @@ class ManageService extends BaseService {
         $timeout = time() + TOKEN_EXPIRE_LONG;
         $this->_updateTokenTimeout($result['id'], $timeout);
         $flag = TRUE;
-        $data['token'] = $tokenData['src_token'];
-        $data['timeout'] = $timeout;
+        //$data['token'] = $tokenData['src_token'];
+        //$data['timeout'] = $timeout;
         $data['manage_id'] = $tokenData['manage_id'];
       }
     }

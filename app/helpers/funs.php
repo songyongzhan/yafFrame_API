@@ -211,7 +211,9 @@ function downloadfile($file, $isSpeed = TRUE) {
     die();
   }
 
-  $filename = basename($file);
+  $filename = explode('/', trim($file, '/'));
+  $filename = end($filename);
+  debugMessage('下载文件:' . $file . '====>' . $filename);
   header('Content-Description: File Transfer');
   header('Content-Type: application/octet-stream');
   header('Content-Disposition: attachment; filename=' . $filename);

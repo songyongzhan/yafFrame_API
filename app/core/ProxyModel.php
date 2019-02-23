@@ -42,7 +42,8 @@ class ProxyModel {
 
     if ($method[0] !== '_' && method_exists($this->_instance, $method) && strpos(strtolower(get_class($this->_instance)), self::VALIDATE)) {
 
-      ENVIRONMENT == 'develop' && debugMessage('develop自动验证:' . $this->_classname . '->' . $method . '() 参数:' . jsonencode($params));
+      //ENVIRONMENT == 'develop' &&
+      debugMessage('develop自动验证:' . $this->_classname . '->' . $method . '() 参数:' . jsonencode($params));
 
       $reflection = new Reflec($this->_instance);
 
@@ -72,6 +73,7 @@ class ProxyModel {
 
       }
     }
+
     return call_user_func_array([$this->_instance, $method], $params);
   }
 
