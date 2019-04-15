@@ -20,7 +20,19 @@ class ApiDispatchPlugin extends Yaf_Plugin_Abstract {
     //如果是api模块，跳转到 ApiBase 的_remap方法 封装统一入口
     $apiInterceptor = Tools_Config::getConfig('api.interceptor');
     $apiInterceptor = array_change_value_case_recursive(explode(',', $apiInterceptor), CASE_LOWER);
-    if (in_array(strtolower($request->module), $apiInterceptor)) {
+    $module = strtolower($request->module);
+
+    //var_dump($request);
+    //var_dump($apiInterceptor);
+    //var_dump($request->getModuleName());
+    //var_dump($request->getRequestUri());
+    //
+    //exit;
+
+    if ($module === 'common')
+      showApiException('Common模块禁止访问', StatusCode::COMMOM_MODULE_DENINE);
+
+    if (in_array($module, $apiInterceptor)) {
       $request->setControllerName('ApiBase');
       $request->setActionName('_remap');
     }

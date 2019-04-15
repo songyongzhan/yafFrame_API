@@ -14,6 +14,7 @@ class DecrytPlugin extends Yaf_Plugin_Abstract {
 
     $config = [
       'a' => ['AESDecrypt', [COOKIE_KEY, TRUE]],
+      'd' => ['DESDecrypt', [COOKIE_KEY, TRUE]],
       'r' => ['Rsa::Decrypt', [JSPHP_PWD_PRIVKEY, TRUE]],
     ];
 

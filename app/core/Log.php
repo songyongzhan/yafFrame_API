@@ -63,20 +63,24 @@ class Log {
 
       $howLong = $all[1][0];
       $rename = FALSE;
-      switch ($all[2][0]) {
-        case 'h': //时
-          $rename = date('YmdH') - date('YmdH', filectime($file)) >= $howLong ? TRUE : FALSE;
-          break;
-        case 'd': //天
-          $rename = date('Ymd') - date('Ymd', filectime($file)) >= $howLong ? TRUE : FALSE;
-          break;
-        case 'i': //分
-          $rename = date('YmdHi') - date('YmdHi', filectime($file)) >= $howLong ? TRUE : FALSE;
-          break;
-        case 'm': //月
-          $rename = date('Ym') - date('Ym', filectime($file)) >= $howLong ? TRUE : FALSE;
-          break;
+      if (file_exists($file)) {
+        switch ($all[2][0]) {
+          case 'h': //时
+            $rename = date('YmdH') - date('YmdH', filectime($file)) >= $howLong ? TRUE : FALSE;
+            break;
+          case 'd': //天
+            $rename = date('Ymd') - date('Ymd', filectime($file)) >= $howLong ? TRUE : FALSE;
+            break;
+          case 'i': //分
+            $rename = date('YmdHi') - date('YmdHi', filectime($file)) >= $howLong ? TRUE : FALSE;
+            break;
+          case 'm': //月
+            $rename = date('Ym') - date('Ym', filectime($file)) >= $howLong ? TRUE : FALSE;
+            break;
+        }
       }
+
+
     }
     $backFile = $this->file_path . DS . date('Y_m_d_H_i_s') . '.' . $this->file_ext;
 

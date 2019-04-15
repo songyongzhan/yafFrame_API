@@ -255,6 +255,7 @@ class CoreModel {
   public function _filterLog($data) {
 
 
+
     return $data;
   }
 

@@ -14,12 +14,10 @@ class BaseModel extends CoreModel {
   use TraitCommon;
 
   private static $_object = [];
-
   /**
    * @var MysqliDb
    */
   protected $_db;
-
   /**
    * @var table
    */
@@ -141,6 +139,8 @@ class BaseModel extends CoreModel {
 
     if (isset($result['createtime']) && $this->output_time_format)
       $result['createtime'] = date($this->output_time_format, $result['createtime']);
+
+
 
     $this->_logSql();
     return $result;

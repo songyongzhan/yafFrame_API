@@ -300,6 +300,13 @@ function export_csv($file_content, $filename, $isSaveFile = FALSE) {
   die();
 }
 
+/**
+ * 编码转换
+ * @param $data
+ * @param string $from_encoding
+ * @param string $to_encoding
+ * @return array|null|string|string[]
+ */
 function convert_encodeing($data, $from_encoding = 'UTF-8', $to_encoding = 'GBK') {
   if (!$data)
     return $data;

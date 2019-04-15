@@ -72,7 +72,10 @@ switch (ENVIRONMENT) {
 /**
  * 配置型常量
  */
+//是否初始化模板
 define('TWIG_INIT_FLAG', TRUE);
+
+//是否初始化数据
 define('DB_INIT_FLAG', TRUE);
 
 //定义错误页面存放路径
@@ -82,16 +85,20 @@ define('EXCEPTION_FILENAME', 'exception_general.php');
 
 define('PREFIX', 'api_'); //设置时，前缀是app_
 
-define('PWD_SALT', 'ltdata20181226');
+//密码加盐处理
+define('PWD_SALT', '');
 
 define('TOKEN_EXPIRE_LONG', 1800); //token存在30分钟
 
+//每一页显示页码条数
 define('PAGESIZE', 10);
 
 define('POST_TRANSTION_ACCESS_TOKEN', 'post_access_token'); //如果特殊情况，需要需要通过post传递参数，需要传递 post_access_token
 
+//是否验证token
 define('IS_CHECK_TOKEN', TRUE);
 
+//是否验证栏目菜单
 define('IS_CHECK_MENU', TRUE);
 
 /**
@@ -104,3 +111,4 @@ define("DB_AUTOTIME_OUT_FORMAT", 'Y-m-d H:i:s'); //输入日期格式
 $filterParam = [
   'mobile'
 ];
+

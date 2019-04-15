@@ -25,8 +25,6 @@ class InitExceptionPlugin extends Yaf_Plugin_Abstract {
 
       //处理我们的异常信息 在这里可以根据环境替换StatusCode
 
-
-
       $old_exception && $old_exception($exception);
 
     });

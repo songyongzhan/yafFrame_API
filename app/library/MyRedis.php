@@ -73,6 +73,14 @@ class MyRedis {
     return $this->redis->keys($key);
   }
 
+
+  public function setEx($key, $val, $expire = 0) {
+    if ($expire === 0 || !is_int($expire))
+      $expire = $this->expire;
+
+    return $this->redis->setex($key, $expire, $val);
+  }
+
   // 设置一条String
   public function setStr($key, $text, $timeout = TRUE) {
     $this->redis->set($key, $text);
@@ -287,7 +295,7 @@ class MyRedis {
     }
   }
 
-  public function hmSet($key,$_data,$timeout = TRUE){
+  public function hmSet($key, $_data, $timeout = TRUE) {
 
     $this->redis->hMset($key, $_data);
     if ($timeout) {

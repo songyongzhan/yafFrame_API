@@ -46,13 +46,14 @@ class Exceptions extends Yaf_Exception {
     }
 
     is_null($template) || $this->exceptionFileName = $template;
-    ob_start();
-    $file = $this->errorTemplatePath . DS . trim($this->exceptionFileName, '/');
-    file_exists($file) && require_once $file;
-    $buffer = ob_get_contents();
-    ob_end_clean();
-    echo $buffer;
-
+    if (ENVIRONMENT !== 'product') {
+      ob_start();
+      $file = $this->errorTemplatePath . DS . trim($this->exceptionFileName, '/');
+      file_exists($file) && require_once $file;
+      $buffer = ob_get_contents();
+      ob_end_clean();
+      echo $buffer;
+    }
   }
 
   public function log_exception($type, $message = NULL, $file = NULL, $line = NULL) {
@@ -86,14 +87,17 @@ class Exceptions extends Yaf_Exception {
     if (isAjax())
       showJsonMsg(API_FAILURE, $message);
 
-    $message = '<p>' . (is_array($message) ? implode('</p><p>', $message) : $message) . '</p>';
-    ob_start();
-    $file = $this->errorTemplatePath . DS . trim($this->errorFileName, '/');
-    file_exists($file) && require_once $file;
-    $buffer = ob_get_contents();
-    ob_end_clean();
-    echo $buffer;
-    exit(9);
+    if (ENVIRONMENT !== 'product') {
+      $message = '<p>' . (is_array($message) ? implode('</p><p>', $message) : $message) . '</p>';
+      ob_start();
+      $file = $this->errorTemplatePath . DS . trim($this->errorFileName, '/');
+      file_exists($file) && require_once $file;
+      $buffer = ob_get_contents();
+      ob_end_clean();
+      echo $buffer;
+      exit(9);
+    }
+
   }
 
 }
