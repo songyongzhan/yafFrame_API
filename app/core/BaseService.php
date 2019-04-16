@@ -39,11 +39,16 @@ class BaseService extends CoreService {
     if ($code != API_SUCCESS && empty($msg))
       $msg = StatusCode::get_code_message($code);
 
-    return [
+    $returnData = [
       'code' => $code,
       'msg' => $msg,
       'result' => $result
     ];
+
+    debugMessage('接口返回:' . jsonencode(filterDataToLogFile($returnData)));
+
+    return $returnData;
+
   }
 
 

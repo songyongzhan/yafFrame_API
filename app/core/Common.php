@@ -296,14 +296,15 @@ if (!function_exists('_exception_handler')) {
 
     debugMessage('Trace:' . jsonencode($exception->getTrace()));
 
+    //isCli() OR set_status_header(500);
 
     // Should we display the error?
     if (($exception instanceof Exceptions) || str_ireplace(array('off', 'none', 'no', 'false', 'null'), '', ini_get('display_errors'))) {
 
       $_error->show_exception($exception);
     }
-    isCli() OR set_status_header(500);
 
+    isCli() OR set_status_header(500);
     exit(1); // EXIT_ERROR
   }
 }
@@ -884,9 +885,9 @@ function getFileSize($size = 0) {
 
 
 /**
- * 获取日志记录的数据
+ * 获取用户传递数据
  */
-function getFilterLogData() {
+function getUserData() {
   $data = [];
   if (isset($_SERVER['REQUEST_METHOD'])) {
     switch ($_SERVER['REQUEST_METHOD']) {
@@ -1119,4 +1120,28 @@ function MyCurl($url, $data, $method = 'get', $headers = [], $cookie = []) {
     'content' => $content
   ];
 
+}
+
+
+/**
+ * 过滤掉保存在file日志中的重要数据
+ * @param $data
+ */
+function filterDataToLogFile($data) {
+  //如果是正式环境下，才过滤
+  if (ENVIRONMENT === 'product') {
+    if (!$data || !is_array($data))
+      return $data;
+
+    static $filters = NULL;
+    $filters || $filters = array_change_value_case(FILTERPARAM);
+
+    if ($filters) {
+      foreach ($data as $key => $value) {
+        if (is_array($value)) $data[$key] = filterDataToLogFile($value);
+        else if (in_array(strtolower($key), $filters)) $data[$key] = '【' . strlen($value) . '】';
+      }
+    }
+  }
+  return $data;
 }

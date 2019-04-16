@@ -251,12 +251,9 @@ class CoreModel {
     return $this->fetchFinish($result);
   }
 
-  //记录日志，需要过滤的字段，日后完善
+  //记录日志，需要过滤的字段
   public function _filterLog($data) {
-
-
-
-    return $data;
+    return filterDataToLogFile($data);
   }
 
   //解析url
