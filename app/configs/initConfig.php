@@ -31,8 +31,8 @@ return [
     //只有是在api模块下才执行 如果像上面单独的写法，则全部注册
     //这种带数组的写法，系统会检测是否这个模块，验证成功后，注册
     'Api' => [
-      'LoginCheck' => 'LoginCheck',
-      'MenuCheck' => 'MenuCheck', //暂时关闭
+      //'LoginCheck' => 'LoginCheck',
+      //'MenuCheck' => 'MenuCheck', //暂时关闭
     ],
 
 

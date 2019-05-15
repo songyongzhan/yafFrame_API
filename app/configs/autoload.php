@@ -15,14 +15,12 @@ require_once APP_PATH . DIRECTORY_SEPARATOR . 'app/configs/api.php';
 }*/
 
 $autoload = [];
-$autoload['helper'] = array(
-  'helper_funs' => 'funs',
-  'StatusCode' => 'StatusCode'
-);
 
-$autoload['_autoload'] = array(
+//=================核心加载 勿动 开始==============================
+$autoload['_autoload'] = [
   'TraitCommon' => APP_PATH . '/app/core/TraitCommon.php',
   'CoreController' => APP_PATH . '/app/core/CoreController.php',
+  'Model' => APP_PATH . '/app/core/Model.php',
   'CoreModel' => APP_PATH . '/app/core/CoreModel.php',
   'CoreService' => APP_PATH . '/app/core/CoreService.php',
   'BaseController' => APP_PATH . '/app/core/BaseController.php',
@@ -30,7 +28,29 @@ $autoload['_autoload'] = array(
   'BaseService' => APP_PATH . '/app/core/BaseService.php',
   'ProxyModel' => APP_PATH . '/app/core/ProxyModel.php',
   'CoreBootstrap' => APP_PATH . '/app/core/CoreBootstrap.php',
-);
+];
+
+$autoload['helper'] = [
+  'helper_funs' => 'funs',
+  'StatusCode' => 'StatusCode'
+];
+//=================核心加载 勿动 结束==============================
+
+
+//=================业务加载项==============================
+$autoload['business_autoload'] = [
+
+];
+
+$autoload['business_helper'] = [
+  'RpcTrait' => 'RpcTrait'
+];
+
+//=================业务加载项==============================
+
+
+$autoload['_autoload'] = $autoload['_autoload'] + $autoload['business_autoload'];
+$autoload['helper'] = $autoload['helper'] + $autoload['business_helper'];
 
 spl_autoload_register(function ($class) use ($autoload) {
   if (isset($autoload['_autoload'][$class]) && is_file($file = $autoload['_autoload'][$class])) {

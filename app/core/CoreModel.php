@@ -9,7 +9,7 @@
 
 defined('APP_PATH') OR exit('No direct script access allowed');
 
-class CoreModel {
+class CoreModel extends Model {
 
 
   protected $_host = NULL;

@@ -193,6 +193,7 @@ class BaseModel extends CoreModel {
    * @param null $table
    * @return mixed
    * @throws InvalideException
+   * 2019/5/11 6:31
    */
   public final function getCount($where, $table = NULL) {
     is_null($table) || $this->table = $table;
@@ -263,8 +264,8 @@ class BaseModel extends CoreModel {
   protected final function setCond($where) {
 
     if (!$this->realDelete) {
-      $dbwhere = $this->_db->getWhere();
-      $dbwhere = array_column($dbwhere, 1);
+      //$dbwhere = $this->_db->getWhere();
+      //$dbwhere = array_column($dbwhere, 1);
       //$flag = FALSE;
       //foreach ($dbwhere as $val) {
       //  if (stristr($val, 'status')) {
@@ -421,7 +422,7 @@ class BaseModel extends CoreModel {
         $value['createtime'] = date($this->output_time_format, $value['createtime']);
       return $value;
     }, $result);
-    $this->_querySqls[] = $this->getLastQuery();
+    $this->_logSql();
     return $result;
   }
 
@@ -487,6 +488,12 @@ class BaseModel extends CoreModel {
   }
 
 
+  /**
+   * 切换数据库
+   * @param $name
+   * @return $this
+   * @throws Exception
+   */
   public function chooseConnection($name) {
     return $this->_db->connection($name);
   }
@@ -512,6 +519,48 @@ class BaseModel extends CoreModel {
     if (!$table) return FALSE;
     $this->table = $this->prefix . strtolower($table);
     return TRUE;
+  }
+
+  /**
+   * 获取类表名
+   * @method getTable
+   * @return table
+   * 2019/5/11 16:09
+   */
+  public function getTable() {
+    return $this->table;
+  }
+
+  /**
+   * 根据表获取表字段
+   * @method getFields
+   * @param null $table
+   * @return array
+   * 2019/5/11 16:28
+   */
+  public function getFields($table = NULL) {
+    is_null($table) && $table = $this->table;
+
+    $data = $this->getTableInfo($table);
+    if ($data)
+      return array_column($data, 'COLUMN_NAME', 'COLUMN_NAME');
+    else
+      return [];
+  }
+
+
+  /**
+   * 获取当前表 下一个id
+   * @method getNextInsertId
+   * @return int
+   * 2019/5/11 16:40
+   */
+  public function getNextInsertId($table = NULL) {
+
+    is_null($table) && $table = $this->table;
+    $data = $this->query("show table status like '{$table}' ");
+    return isset($data['Auto_increment']) ? $data['Auto_increment'] : 0;
+
   }
 
   /**
@@ -544,5 +593,20 @@ class BaseModel extends CoreModel {
     return $value;
   }
 
+  /**
+   * 过滤数据
+   * @method filterData
+   * @param $data
+   * 2019/5/11 16:55
+   */
+  protected function filterData($data) {
+    //过滤字段不存在的数据
+    $fields = $this->getFields();
+    foreach ($data as $key => $val) {
+      if (!in_array($key, $fields))
+        unset($data[$key]);
+    }
+    return $data;
+  }
 
 }
