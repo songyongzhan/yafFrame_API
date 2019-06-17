@@ -19,6 +19,15 @@ class EntityService extends BaseService {
     return $this->show($result);
   }
 
+  /**
+   * @method add
+   *
+   * @param string $title <require> 标题不能为空
+   * @param string $table_name <require|alphaDash> 表名不能为空|表名只能是字母数字下划线
+   * @param string $descript <require> 描述不能为空
+   * @return array
+   * 2019/5/19 16:47
+   */
   public function add($data) {
     $lastInsertId = $this->entityModel->insert($data);
     if ($lastInsertId) {
@@ -40,7 +49,7 @@ class EntityService extends BaseService {
 
   /**
    * 获取单个信息
-   * @param int $id <require|number> id
+   * @param int $id <require|number> id不能为空|id必须是数字
    * @param string $fileds
    * @return mixed
    */
@@ -54,7 +63,7 @@ class EntityService extends BaseService {
 
   /**
    * 分组更新数据
-   * @param int $id <require|number> id
+   * @param int $id <require|number> id不能为空|id必须是数字
    * @param string $title <require> 名称
    * @param int $status <require|number> 状态
    * @return array mixed 返回用户数据

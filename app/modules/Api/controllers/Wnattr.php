@@ -14,8 +14,6 @@ class WnattrController extends ApiBaseController {
 
   public function getListAction() {
     //如果传递了page_size 就分页
-    $page_size = $this->_post('page_size', PAGESIZE);
-    $page_num = $this->_post('page_num', 1);
     $title = $this->_post('title', '');
 
     $rules = [
@@ -28,7 +26,7 @@ class WnattrController extends ApiBaseController {
 
     $where = $this->where($rules, array_filter($data, 'filter_empty_callback'));
 
-    $result = $this->wnattrService->getListPage($where, $page_num, $page_size);
+    $result = $this->wnattrService->getList($where);
     return $result;
   }
 
@@ -67,7 +65,6 @@ class WnattrController extends ApiBaseController {
   }
 
   public function getAttrListSelectAction(){
-
     $result=$this->wnattrService->getAttrListSelect();
     return $result;
 
@@ -77,8 +74,8 @@ class WnattrController extends ApiBaseController {
     return [
       'title' => $this->_post('title'),
       'pid' => $this->_post('pid'),
-      'thumb' => $this->_post('thumb'),
-      'descript' => $this->_post('descript'),
+      'thumb' => $this->_post('thumb',''),
+      'descript' => $this->_post('descript',''),
       'tubiao' => $this->_post('tubiao', ''),
       'keywords' => $this->_post('keywords', ''),
       't_index' => $this->_post('t_index', ''),
@@ -88,7 +85,8 @@ class WnattrController extends ApiBaseController {
       't_article' => $this->_post('t_article', ''),
       'template_index' => $this->_post('template_index', 't_index'),
       'body' => $this->_post('body', ''),
-      'limitpage' => $this->_post('limitpage', 10)
+      'limitpage' => $this->_post('limitpage', 10),
+      'sort_id' => $this->_post('sort_id', 0)
     ];
   }
 

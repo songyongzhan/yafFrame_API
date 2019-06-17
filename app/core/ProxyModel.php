@@ -121,10 +121,25 @@ class ProxyModel {
 
         $config['rules'][$key][$item[2][$i]] = $item[3][$i];
 
+        /*protected $rule =   [
+          'name'  => 'require|max:25',
+          'age'   => 'number|between:1,120',
+          'email' => 'email',
+        ];
+
+        protected $message  =   [
+          'name.require' => '名称必须',
+          'name.max'     => '名称最多不能超过25个字符',
+          'age.number'   => '年龄必须是数字',
+          'age.between'  => '年龄只能在1-120之间',
+          'email'        => '邮箱格式错误',
+        ];*/
+
         if (strpos($item[3][$i], '|') && strpos($item[4][$i], '|')) {
           $moreRules = explode('|', $item[3][$i]);
           $moreMessage = explode('|', $item[4][$i]);
-          for ($j = 0; $j < count($moreRules); $j++) {
+          $count = count($moreMessage);
+          for ($j = 0; $j < $count; $j++) {
             $ruleName = strpos($moreRules[$j], ':') ? (explode(':', $moreRules[$j]))[0] : $moreRules[$j];
             $config['msg'][$key][$item[2][$i] . '.' . $ruleName] = $moreMessage[$j];
           }

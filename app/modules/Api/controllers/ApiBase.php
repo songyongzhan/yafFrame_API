@@ -227,5 +227,16 @@ class ApiBaseController extends BaseController {
     return _parseCurrentUri();
   }
 
+  /**
+   * 过滤掉空字符
+   * @method filterData
+   * @param $data
+   * @return array
+   * 2019/5/10 6:55
+   */
+  protected function filterData($data) {
+    return array_filter($data, 'filter_empty_callback');
+  }
+
 
 }

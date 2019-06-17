@@ -17,7 +17,7 @@ defined('APP_PATH') OR exit('No direct script access allowed');
 class WnattrService extends BaseService {
 
   protected $field = ['id', 'title', 'pid', 'thumb', 'descript', 'tubiao', 'keywords', 't_index', 't_list', 't_listimg', 't_body', 't_article', 'template_index', 'limitpage'
-    , 'status', 'updatetime', 'createtime'];
+    , 'sort_id', 'status', 'updatetime', 'createtime'];
 
   /**
    * 获取列表
@@ -25,20 +25,21 @@ class WnattrService extends BaseService {
    * @param $field
    * @return mixed
    */
-  public function getListPage(array $where, $page_num, $page_size) {
-    $result = $this->wnattrModel->getListPage($where, $this->field, $page_num, $page_size);
+  public function getList(array $where) {
+    $result = $this->wnattrModel->getList($where,$this->field);
+    $result=menu_sort(sort_by_sort_id($result));
     return $this->show($result);
   }
 
   /**
    * @method add
-   * @param $title
-   * @param $pid
+   * @param string $title <require> 标签名称不能为空
+   * @param int $pid <require|number> pid不能为空|pid必须是数字
    * @param $data
    * @return array
    * 2019/5/12 19:58
    */
-  public function add($title, $pid, $data) {
+  public function add($data) {
 
     $lastInsertId = $this->wnattrModel->insert($data);
     if ($lastInsertId) {
@@ -52,7 +53,7 @@ class WnattrService extends BaseService {
 
   /**
    * 删除一个
-   * @param int $id <require|number> id
+   * @param int $id <require|number> id不能为空
    */
   public function delete($id) {
 
@@ -70,13 +71,13 @@ class WnattrService extends BaseService {
 
   /**
    * 获取单个信息
-   * @param int $id <require|number> id
+   * @param int $id <require|number> id不能为空
    * @param string $fileds
    * @return mixed
    */
   public function getOne($id, $fileds = '*') {
     if ($fileds == '*')
-      $this->field;
+      $fileds = $this->field;
 
     $result = $this->wnattrModel->getOne($id, array_merge($fileds, ['body']));
     return $result ? $this->show($result) : $this->show([], StatusCode::DATA_NOT_EXISTS);
@@ -84,12 +85,13 @@ class WnattrService extends BaseService {
 
   /**
    * 分组更新数据
-   * @param int $id <require|number> id
+   * @param int $id <require|number> id不能为空
    * @param string $title <require> 名称
+   * @param int $pid <require|number> pid不能为空|pid必须是数字
    * @return array mixed 返回用户数据
    */
 
-  public function update($id, $title, $pid, $data) {
+  public function update($id, $data) {
 
     $result = $this->wnattrModel->update($id, $data);
     if ($result) {
@@ -134,7 +136,7 @@ class WnattrService extends BaseService {
 
     $where = [];
     $result = $this->wnattrModel->getList($where, $field);
-    $result = menu_sort(menu_sort_by_sort_id($result));
+    $result = menu_sort(menu_sort(sort_by_sort_id($result)));
     return $this->show($result);
   }
 

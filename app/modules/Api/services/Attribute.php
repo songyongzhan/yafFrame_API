@@ -12,9 +12,19 @@ defined('APP_PATH') OR exit('No direct script access allowed');
 
 class AttributeService extends BaseService {
 
-  protected $field = ['id', 'title', 'status', 'sort_id', 'updatetime', 'createtime'];
+  protected $field = ['id', 'title', 'input_type', 'input_label', 'input_name', 'validate_message', 'default_value', 'options_multi_type',
+    'validate_type', 'column_name', 'column_type', 'commenttxt', 'column_default', 'column_type', 'column_value', 'status', 'sort_id', 'updatetime', 'createtime'];
 
 
+  /**
+   * 获取属性中的列表
+   * @method getListPage
+   * @param array $where
+   * @param $page_num
+   * @param $page_size
+   * @return array
+   * 2019/6/1 17:27
+   */
   public function getListPage(array $where, $page_num, $page_size) {
     $result = $this->attributeModel->getListPage($where, $this->field, $page_num, $page_size);
     return $this->show($result);
@@ -75,6 +85,8 @@ class AttributeService extends BaseService {
     if ($fileds == '*')
       $fileds = $this->field;
 
+    $fileds = array_merge($fileds, ['options', 'input_width', 'placeholder', 'notnull']);
+
     $result = $this->attributeModel->getOne($id, $fileds);
     return $result ? $this->show($result) : $this->show([], StatusCode::DATA_NOT_EXISTS);
   }
@@ -93,6 +105,7 @@ class AttributeService extends BaseService {
    * 2019/5/10 7:03
    */
   public function update($id, $data) {
+    $data['id'] = $id;
     $this->_check($data, 'update');
     $result = $this->attributeModel->update($id, $data);
     if ($result)
@@ -114,18 +127,44 @@ class AttributeService extends BaseService {
 
     //添加 判断 title 和 input_name 不能重名
     $titleWhere = [getWhereCondition('title', $data['title'])];
+
     $method == 'update' && $titleWhere[] = getWhereCondition('id', $data['id'], '!=');
-    $titleCount = $this->attributeModel->getCount();
+
+    $titleCount = $this->attributeModel->getCount($titleWhere);
+
     if ($titleCount > 0)
       showApiException('此名称已经存在，请更改', StatusCode::ATTRIBUTE_TITLE_EXISTS);
 
     $inputNameWhere = [getWhereCondition('input_name', $data['input_name'])];
     $method == 'update' && $inputNameWhere[] = getWhereCondition('id', $data['id'], '!=');
 
-    $inputNameCount = $this->attributeModel->getCount();
+    $inputNameCount = $this->attributeModel->getCount($inputNameWhere);
     if ($inputNameCount > 0)
-      showApiException('此名称已经存在，请更改', StatusCode::ATTRIBUTE_INPUTNAME_EXISTS);
+      showApiException('此名称input_name已经存在，请更改', StatusCode::ATTRIBUTE_INPUTNAME_EXISTS);
 
+  }
+
+  /**
+   * @method getAttrbuteByColumn
+   * @param $searchcolumn
+   * @return array
+   * @throws InvalideException
+   * 2019/5/17 20:29
+   */
+  public function getAttrbuteByColumn($searchcolumn) {
+
+    if (!is_string($searchcolumn))
+      $searchcolumn = explode(',', trim($searchcolumn, ','));
+
+    if (!is_array($searchcolumn))
+      showApiException('searchcolumn必须是数组或字符串');
+
+    $where = [
+      getWhereCondition('title', $searchcolumn, 'in')
+    ];
+    $list = $this->attributeModel->getList($where, $this->field);
+
+    return $this->show($list);
   }
 
 

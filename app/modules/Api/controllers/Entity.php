@@ -157,11 +157,12 @@ class EntityController extends ApiBaseController {
       'descript' => $this->_post('descript'),
       'table_engine' => $this->_post('table_engine'),
       'ext' => $this->_post('ext'),
+      'table_name' => $this->_post('table_name'),
       'listcolumn' => $this->_post('listcolumn', ''), //得到字段
-      'listorder' => $this->_post('listorder', ''),
+      'listorder' => $this->_post('listorder', 'id desc'),
       'commenttxt' => $this->_post('commenttxt'),
       'status' => $this->_post('status'),
-      'sort_id' => $this->_post('sort_id')
+      'sort_id' => $this->_post('sort_id',0)
     ];
   }
 

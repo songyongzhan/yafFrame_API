@@ -32,7 +32,10 @@ class AttributeController extends ApiBaseController {
     return $result;
   }
 
+
   public function addAction() {
+    //print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
+    //exit;
     $data = $this->getData();
     $result = $this->attributeService->add($data);
     return $result;
@@ -78,7 +81,7 @@ class AttributeController extends ApiBaseController {
       'options_multi_type' => $this->_post('options_multi_type', 1),
       'options' => $this->_post('options', ''),
       'placeholder' => $this->_post('placeholder', ''),
-      'column_name' => $this->_post('column_name'),
+      'column_name' => $this->_post('input_name'),  //设计之时，冗余字段
       'column_type' => $this->_post('column_type'),
       'column_value' => $this->_post('column_value', ''),
       'notnull' => $this->_post('notnull'),
