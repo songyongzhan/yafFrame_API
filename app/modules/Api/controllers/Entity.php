@@ -85,6 +85,32 @@ class EntityController extends ApiBaseController {
   }
 
   /**
+   * 添加单个item项
+   * @method addSignoneAction
+   * @return array
+   * 2019/7/21 1:02
+   */
+  public function addSignoneAction() {
+    $entityId = $this->_post('entity_id');
+
+    $data = [
+      'input_label' => $this->_post('input_label'),
+      'input_name' => $this->_post('input_name'),
+      'default_value' => $this->_post('default_value'),
+      'input_width' => $this->_post('input_width'),
+      'validate_message' => $this->_post('validate_message'),
+      'commenttxt' => $this->_post('commenttxt'),
+      'attribute_id' => $this->_post('attribute_id'),
+      'sort_id' => $this->_post('sort_id'),
+      'entity_id' => $entityId
+    ];
+
+    $result = $this->entitycolumnService->addSignone($entityId, $data);
+
+    return $result;
+  }
+
+  /**
    * 更新实体属性提示相关信息
    * @method updatecolumnAction
    * @return array
@@ -102,6 +128,8 @@ class EntityController extends ApiBaseController {
       'default_value' => $this->_post('default_value'),
       'input_width' => $this->_post('input_width'),
       'validate_message' => $this->_post('validate_message'),
+      'commenttxt' => $this->_post('commenttxt'),
+      'attribute_id' => $this->_post('attribute_id'),
       'sort_id' => $this->_post('sort_id')
     ];
 
@@ -118,11 +146,36 @@ class EntityController extends ApiBaseController {
    */
   public function deletecolumnAction() {
     $id = $this->_post('id');
-    return $this->entitycolumnService->delete($id);
+    $entityId = $this->_post('entity_id');
+    return $this->entitycolumnService->delete($entityId, $id);
   }
 
   /**
-   * 根据实体id 获取元素 用于渲染模板的列表
+   * 专门用于表单排序
+   * @method sortColumnAction
+   * @return mixed
+   * 2019/7/22 7:48
+   */
+  public function sortColumnAction() {
+    $id = $this->_post('id');
+    $entityId = $this->_post('entity_id');
+    $sortId = $this->_post('sort_id');
+    return $this->entitycolumnService->sortColumn($entityId, $id, $sortId);
+  }
+
+  /**
+   * 将显示这个实体 对应 数据表所有字段
+   * @method getTableFieldAction
+   * 2019/7/21 12:43
+   */
+  public function getTableFieldAction() {
+    $entityId = $this->_post('entity_id');
+    return $this->entitycolumnService->getTableField($entityId);
+
+  }
+
+  /**
+   * 根据 实体id 获取元素 用于渲染模板的列表
    * @method getviewlistAction
    * @return mixed
    * 2019/5/10 22:54
@@ -138,10 +191,10 @@ class EntityController extends ApiBaseController {
    * @return mixed
    * 2019/5/12 17:52
    */
-  public function updatelistcolumnAction(){
-    $id=$this->_post('id');
-    $listcolumn=$this->_post('listcolumn');
-    $result=$this->entityService->updateListColumn($id,$listcolumn);
+  public function updatelistcolumnAction() {
+    $id = $this->_post('id');
+    $listcolumn = $this->_post('listcolumn');
+    $result = $this->entityService->updateListColumn($id, $listcolumn);
     return $result;
   }
 
@@ -157,12 +210,13 @@ class EntityController extends ApiBaseController {
       'descript' => $this->_post('descript'),
       'table_engine' => $this->_post('table_engine'),
       'ext' => $this->_post('ext'),
+      'searchcolumn' => $this->_post('searchcolumn'),
       'table_name' => $this->_post('table_name'),
       'listcolumn' => $this->_post('listcolumn', ''), //得到字段
       'listorder' => $this->_post('listorder', 'id desc'),
       'commenttxt' => $this->_post('commenttxt'),
       'status' => $this->_post('status'),
-      'sort_id' => $this->_post('sort_id',0)
+      'sort_id' => $this->_post('sort_id', 0)
     ];
   }
 

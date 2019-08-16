@@ -41,6 +41,11 @@ switch (ENVIRONMENT) {
     define('REDIS_PASSWORD', ''); //reids密码
     define('REDIS_EXPIRE', 1800); //reids默认过期时长
 
+    define('UPLOAD_PATH', APP_PATH . DS . 'data/uploads'); //文件上传目录
+    define('VIEW_HOST', 'http://192.168.183.129:8059'); //访问host
+    define('VIEW_PATH', DS . 'data/uploads'); //访问地址
+
+
     break;
   case 'testing': //测试配置文件
     define('REMOTE_HOST', '');
@@ -52,6 +57,10 @@ switch (ENVIRONMENT) {
     define('REDIS_PORT', 6379); //连接redis
     define('REDIS_PASSWORD', ''); //reids密码
     define('REDIS_EXPIRE', 1800); //reids默认过期时长
+    define('UPLOAD_PATH', APP_PATH . DS . 'data/uploads'); //文件上传目录
+    define('VIEW_HOST', 'http://192.168.183.129:8059'); //访问host
+    define('VIEW_PATH', DS . 'data/uploads'); //访问地址
+
     break;
   case 'product': //生产配置文件
 
@@ -64,6 +73,11 @@ switch (ENVIRONMENT) {
     define('REDIS_PORT', ''); //连接redis
     define('REDIS_PASSWORD', ''); //reids密码
     define('REDIS_EXPIRE', 1800); //reids默认过期时长
+    define('UPLOAD_PATH', APP_PATH . DS . 'data/uploads'); //文件上传目录
+
+    define('VIEW_HOST', 'http://192.168.183.129:8059'); //访问host
+    define('VIEW_PATH', DS . 'data/uploads'); //访问地址
+
 
     break;
 }

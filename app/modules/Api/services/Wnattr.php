@@ -26,8 +26,8 @@ class WnattrService extends BaseService {
    * @return mixed
    */
   public function getList(array $where) {
-    $result = $this->wnattrModel->getList($where,$this->field);
-    $result=menu_sort(sort_by_sort_id($result));
+    $result = $this->wnattrModel->getList($where, $this->field);
+    $result = menu_sort(sort_by_sort_id($result));
     return $this->show($result);
   }
 

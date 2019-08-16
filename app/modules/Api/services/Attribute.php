@@ -68,7 +68,8 @@ class AttributeService extends BaseService {
     ];
 
     if ($this->entitycolumnModel->getCount($where) > 0)
-      showApiException('此项已在使用，请删除关联后再删除', StatusCode::ATTRIBUTE_USED);
+      showApiException('此项已在使用，请删除关联后再删除');
+
 
     $result = $this->attributeModel->delete($id);
     return $result > 0 ? $this->show(['row' => $result, 'id' => $id]) : $this->show([], StatusCode::DATA_NOT_EXISTS);
@@ -151,20 +152,65 @@ class AttributeService extends BaseService {
    * @throws InvalideException
    * 2019/5/17 20:29
    */
-  public function getAttrbuteByColumn($searchcolumn) {
+  public function getAttrbuteByColumn($searchcolumn, $entityId) {
 
-    if (!is_string($searchcolumn))
+    if (is_string($searchcolumn))
       $searchcolumn = explode(',', trim($searchcolumn, ','));
 
     if (!is_array($searchcolumn))
       showApiException('searchcolumn必须是数组或字符串');
 
-    $where = [
-      getWhereCondition('title', $searchcolumn, 'in')
-    ];
-    $list = $this->attributeModel->getList($where, $this->field);
+    $list = [];
+    $entityColumnList = $this->entitycolumnService->getviewlist($entityId);
+
+
+    if (isset($entityColumnList['result']) && $entityColumnList['result']) {
+      foreach ($entityColumnList['result'] as $val) {
+        if (in_array($val['input_name'], $searchcolumn, TRUE))
+          $list[] = $val;
+      }
+    }
 
     return $this->show($list);
+  }
+
+
+  /**
+   * 用于获取所有字段列表
+   * @method getList
+   * @param $where
+   * @return array
+   * @throws InvalideException
+   * 2019/7/20 11:43
+   */
+  public function getList($where) {
+    $result = $this->attributeModel->getList($where, ['id', 'title', 'input_type', 'input_label', 'input_name', 'validate_type']);
+    return $this->show($result);
+  }
+
+  /**
+   *
+   * @param int $id <require|number> id不能为空|id必须是数字
+   * @method getAttributeByView
+   * @param $id
+   * @return array
+   * 2019/7/20 14:33
+   */
+  public function getAttributeByView($id) {
+
+    $fileds = $this->field;
+
+    $fileds = array_merge($fileds, ['options', 'input_width', 'placeholder', 'notnull']);
+
+    $result = $this->attributeModel->getOne($id, $fileds);
+    //echo "<pre style='color:blue;font-size:16px;'>";
+    //echo 'File:'.__FILE__.' Line: '.__LINE__.'<br>';
+    //print_r($result);
+    //echo '</pre>';
+    //exit;
+    //$result['default_value_exe'] = $this->automaticService->getDefaultValue($result);
+
+    return $result ? $this->show($result) : $this->show([], StatusCode::DATA_NOT_EXISTS);
   }
 
 

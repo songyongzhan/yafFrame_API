@@ -104,11 +104,12 @@ if (!function_exists('getInstance')) {
    * @throws Exceptions
    */
   function getInstance($controller = NULL, $moduleName = NULL) {
-    static $_instance = NULL;
-    if (is_null($_instance)) {
+    static $_instance = [];
+    if (!isset($_instance[$controller])) {
 
       $defaultController = Tools_Config::getConfig('application.dispatcher.defaultController') ?: 'Index';
       $controllerName = is_null($controller) ? getRequest()->getControllerName() ?: ucfirst($defaultController) : ucfirst($controller);
+      $controllerName = str_replace('Controller', '', $controllerName);
       $modules = Tools_Config::getConfig('application.modules');
       $defaultModule = Tools_Config::getConfig('application.dispatcher.defaultModule');
       $moduleName = is_null($moduleName) ? getRequest()->getModuleName() ?: $defaultModule : ucfirst($moduleName);
@@ -119,18 +120,26 @@ if (!function_exists('getInstance')) {
 
       $file = $controllerPath . DS . $controllerName . '.' . Tools_Config::getConfig('application.ext');
 
-      //Wvar_dump($file);exit;
-
-      if (file_exists($file))
+      if (file_exists($file)) {
         import($file);
-      else throw new Exceptions($file . ' file not exists', API_FAILURE);
+      } else {
+        $commonModulePath = APP_PATH . DS . 'app/modules/Common/controllers';
+        $commonModuleFile = $commonModulePath . DS . $controllerName . '.' . Tools_Config::getConfig('application.ext');
+        if (file_exists($commonModuleFile)) {
+          import($commonModuleFile);
+        } else throw new Exceptions($file . ' file not exists', API_FAILURE);
+      }
+
 
       $className = $controllerName . 'Controller';
-
-      $_instance = new $className(getRequest(), isCli() ? new Yaf_Response_Cli() : new Yaf_Response_Http(), Yaf_Registry::has('viewTemplate') ? Yaf_Registry::get('viewTemplate') : new Yaf_View_Simple(TEMPLATE_DIR));
+      $obj = new $className(getRequest(), isCli() ? new Yaf_Response_Cli() : new Yaf_Response_Http(), Yaf_Registry::has('viewTemplate') ? Yaf_Registry::get('viewTemplate') : new Yaf_View_Simple(TEMPLATE_DIR));
+      $_instance[$controller] = $obj;
     }
-    return $_instance;
+
+    return $_instance[$controller];
   }
+
+
 }
 
 if (!function_exists('getTime')) {
@@ -264,7 +273,6 @@ if (!function_exists('checkInclude')) {
       elseif (strpos($class, 'Controller'))
         $loadtype = 'controller';
 
-
       if (!is_null($loadtype)) {
         $file = APP_PATH . DS . 'app/modules/' . ucfirst($moduleName) . '/' . $loadtype . 's/' . str_replace(ucfirst($loadtype), '', $class) . '.' . Tools_Config::getConfig('application.ext');
 
@@ -275,8 +283,6 @@ if (!function_exists('checkInclude')) {
         file_exists($file) && $result = TRUE && require_once $file;
         return $result;
       }
-
-
     }
 
 
@@ -294,10 +300,8 @@ if (!function_exists('_exception_handler')) {
     $_error = $_error = Yaf_Registry::get('exceptions');
     $_error->log_exception('error', 'Exception: ' . $exception->getMessage());
 
-    debugMessage('Trace:' . jsonencode($exception->getTrace()));
-
+    debugMessage('Trace:' . $exception->getTraceAsString());
     //isCli() OR set_status_header(500);
-
     // Should we display the error?
     if (($exception instanceof Exceptions) || str_ireplace(array('off', 'none', 'no', 'false', 'null'), '', ini_get('display_errors'))) {
 
@@ -993,6 +997,18 @@ function getServer($name, $filter = '') {
   return getParams($name, $_SERVER, $filter);
 }
 
+
+/**
+ * @method getFilterPost
+ * @return mixed
+ * 2019/8/11 17:41
+ */
+function getFilterPost() {
+
+  return $_POST;
+}
+
+
 /**
  * 从post中获取参数
  * @param $name
@@ -1000,7 +1016,7 @@ function getServer($name, $filter = '') {
  * @return string
  */
 function getPost($name, $filter = '') {
-  return getParams($name, $_POST, $filter);
+  return getParams($name, getFilterPost(), $filter);
 }
 
 function getParams($name, $hayStack, $filter) {
@@ -1174,6 +1190,8 @@ function arrayOrderby() {
     }
   }
   $args[] =& $data;
+  //echo "<pre>";
+  //print_r($args);exit;
   call_user_func_array('array_multisort', $args);
-  returnarray_pop($args);
+  return array_pop($args);
 }

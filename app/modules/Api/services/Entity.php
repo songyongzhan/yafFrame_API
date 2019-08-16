@@ -55,7 +55,7 @@ class EntityService extends BaseService {
    */
   public function getOne($id, $fileds = '*') {
     if ($fileds == '*')
-      $fileds = array_merge($this->field, ['ext', 'listcolumn']);
+      $fileds = array_merge($this->field, ['ext', 'listcolumn','searchcolumn']);
 
     $result = $this->entityModel->getOne($id, $fileds);
     return $result ? $this->show($result) : $this->show([], StatusCode::DATA_NOT_EXISTS);

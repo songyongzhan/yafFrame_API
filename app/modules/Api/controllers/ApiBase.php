@@ -23,8 +23,15 @@ class ApiBaseController extends BaseController {
       $controller = getInstance($parseUri['controller'], $parseUri['module']);
       $data = call_user_func_array([$controller, $parseUri['action'] . 'Action'], $this->getRequest()->getParams());
       $this->showJson($data['result'], $data['code'], $data['msg']);
-    } catch (Exception $e) {
+    } catch (mysqli_sql_exception $e) {
+      logMessage('exception','异常信息:'.$e->getMessage().' File:'.$e->getFile().' Code:'.$e->getCode());
+      logMessage('exception','trace信息:'.$e->getTraceAsString());
 
+      show_error($e->getMessage(), $e->getCode());
+    } catch (Exception $e) {
+      logMessage('exception','异常信息:'.$e->getMessage().' File:'.$e->getFile().' Code:'.$e->getCode());
+      logMessage('exception','trace信息:'.$e->getTraceAsString());
+      show_error($e->getMessage(), $e->getCode());
       //var_dump($e->getMessage());exit;
       //$this->showJson([], API_FAILURE, $e->getMessage());
       show_error($e->getMessage(), $e->getCode());
@@ -126,6 +133,7 @@ class ApiBaseController extends BaseController {
    * @return mixed
    */
   private function _like_condition($val, $where, $condition_type, $data) {
+
     foreach ($val['key_field'] as $f_key => $f_filed) {
       if (!isset($data[$f_filed])) continue;
       $key_value = isset($data[$f_filed]) ? $data[$f_filed] : '';

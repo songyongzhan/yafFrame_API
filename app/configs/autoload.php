@@ -58,6 +58,7 @@ spl_autoload_register(function ($class) use ($autoload) {
     return TRUE;
   }
 
+
   class_exists('Tools_Request') || Yaf_Loader::import(APP_PATH . '/app/library/Tools/Request.php');
   class_exists('Tools_Config') || Yaf_Loader::import(APP_PATH . '/app/library/Tools/Config.php');
 

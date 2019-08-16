@@ -12,7 +12,7 @@ defined('APP_PATH') OR exit('No direct script access allowed');
 
 class EntitycolumnService extends BaseService {
 
-  protected $field = ['id', 'attribute_id', 'entity_id', 'input_label', 'default_value', 'input_width', 'validate_message', 'sort_id'];
+  protected $field = ['id', 'attribute_id', 'entity_id', 'input_name', 'input_label', 'commenttxt', 'default_value', 'input_width', 'validate_message', 'sort_id'];
 
   /**
    * 根据实体id获取元素列表
@@ -36,7 +36,7 @@ class EntitycolumnService extends BaseService {
   /**
    * 批量接口一次性插入多个
    * @method add
-   * @param int $entityId <reqiure|number> 实体id不能为空
+   * @param int $entityId <require|number> 实体id不能为空|实体id必须是数字
    * @param $data
    * @return array
    * 2019/5/10 22:25
@@ -51,21 +51,21 @@ class EntitycolumnService extends BaseService {
     //切割字符串
     $dataArr = explode('mOO$pp', $data);
     foreach ($dataArr as $key => $val) {
+      if ($val) {
+        $temp = ['entity_id' => $entityId];
+        foreach (explode(',,', $val) as $kval) {
+          $split = explode('=|=', $kval, 2);
+          $temp[$split[0]] = isset($split[1]) ? $split[1] : '';
+        }
 
-      $temp = ['entity_id' => $entityId];
-      foreach (explode(',,', $val) as $kval) {
-        list($insertK, $insertv) = explode('=|=', $kval, 2);
-        $temp[$insertK] = $insertv;
+        $insertData[] = $temp;
       }
-
-      $insertData[] = $temp;
     }
 
     //批量插入到数据库
     $lastInsertId = $this->entitycolumnModel->saveMulti($entityId, $insertData);
     if ($lastInsertId) {
-      $data['ids'] = $lastInsertId;
-      return $this->show($data);
+      return $this->show(['ids' => $lastInsertId]);
     } else
       return $this->show([], StatusCode::INSERT_FAILURE);
 
@@ -73,11 +73,12 @@ class EntitycolumnService extends BaseService {
 
   /**
    * 删除
-   * @param int $id <require|number> id
+   * @param int $entityId <require|number> 实体id不能为空|实体id必须是数字
+   * @param int $id <require|number> id不能为空|id必须是数字
    * @return array
    */
-  public function delete($id) {
-    $result = $this->entitycolumnModel->entityColumnDelete($id);
+  public function delete($entityId, $id) {
+    $result = $this->entitycolumnModel->entityColumnDelete($entityId, $id);
     return $result > 0 ? $this->show(['row' => $result, 'id' => $id]) : $this->show([], StatusCode::DATA_NOT_EXISTS);
   }
 
@@ -98,7 +99,7 @@ class EntitycolumnService extends BaseService {
   /**
    * 微调 增加一个新的元素使用
    * @method addSignone
-   * @param int $entityId <required|number> 实体名称
+   * @param int $entityId <require|number> 实体id不能为空|实体id必须是数字
    * @param $data
    * 2019/5/11 15:20
    */
@@ -131,8 +132,7 @@ class EntitycolumnService extends BaseService {
    */
 
   public function update($entityId, $id, $data) {
-
-    $result = $this->entitycolumnModel->update($id, $data);
+    $result = $this->entitycolumnModel->updateColumn($entityId, $id, $data);
     $result && $data['id'] = $id;
     return $result ? $this->show($data) : $this->show([]);
   }
@@ -140,7 +140,7 @@ class EntitycolumnService extends BaseService {
   /**
    * 根据实体id 获取元素
    * @method getviewlist
-   * @param int $id <require|number> id
+   * @param int $id <require|number> 实体id不能为空|实体id必须是数字
    * @return array
    * @throws InvalideException
    * 2019/5/11 6:14
@@ -153,12 +153,57 @@ class EntitycolumnService extends BaseService {
     $entityList = $this->getList($id, $fields)['result'];
     //无值
     if (!$entityList)
-      $this->show([]);
+      return $this->show([]);
 
     $entityList = $this->entitycolumnModel->dataCombine($entityList);
+
+    $entityList = $this->optionToData($entityList);
 
     //根据sort 进行排序
     return $this->show(arrayOrderby($entityList, 'sort_id', SORT_ASC));
   }
+
+  public function optionToData($entityList) {
+
+    if (!$entityList)
+      return $entityList;
+
+    foreach ($entityList as $key => &$val) {
+      if (in_array($val['input_type'], ['select', 'radio', 'checkbox'])) {
+        $data = $this->automaticService->getOptionsByItem($val);
+        $val['optionsList'] = $data;
+      }
+    }
+    unset($val);
+    return $entityList;
+  }
+
+
+  /**
+   * @method getTableField
+   * @param int $entityId <require|number> 实体id不能为空|实体id必须是数字
+   * 2019/7/21 12:44
+   */
+  public function getTableField($entityId) {
+    $result = $this->entitycolumnModel->getTableField($entityId);
+    return $this->show($result);
+  }
+
+  /**
+   * @method sortColumn
+   * @param $entityId <require|number> 实体id不能为空|实体id必须是数字
+   * @param int $id <require|number> 实体属性id不能为空|实体属性id必须是数字
+   * @param $sortId <require|number> 排序sort_id不能为空|排序sort_id必须是数字
+   * @return array
+   * 2019/7/22 7:52
+   */
+  public function sortColumn($entityId, $id, $sortId) {
+    $data = ['sort_id' => $sortId];
+    $result = $this->entitycolumnModel->update($id, $data);
+
+    return $result ? $this->show(['affected_rows' => $result]) : $this->show([]);
+  }
+
+
 
 }

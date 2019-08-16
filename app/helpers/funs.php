@@ -53,6 +53,38 @@ function get_client_token_data() {
 
 
 /**
+ * 多维数组转数组
+ *
+ * @method moreW2data
+ * @param $data 数据
+ * @param $sunKey 子类中的key
+ *
+ * @return array
+ * 2019/8/11 16:47
+ *
+ * 调用方式
+ * $result=moreW2data($data,'sun');
+ *
+ *
+ */
+function moreW2data($data, $sunKey) {
+  $result = [];
+  if ($data) {
+    foreach ($data as $key => $val) {
+      if (isset($val[$sunKey])) {
+        $_val = $val;
+        unset($_val[$sunKey]);
+        $result[] = $_val;
+        return array_merge($result, moreW2data($val[$sunKey], $sunKey));
+      } else {
+        $result[] = $val;
+      }
+    }
+  }
+  return $result;
+}
+
+/**
  * 栏目分级显示
  * @param array $list 资源列表
  * @param int $pid

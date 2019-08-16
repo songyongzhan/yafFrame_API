@@ -15,14 +15,12 @@ class BaseController extends CoreController {
 
   private static $_object = [];
 
-
   /**
    * 构造方法 PS：仿照构造方法
    */
   public function init() {
 
   }
-
 
   public function _render($templateFile) {
     return $this->getView()->render($templateFile);

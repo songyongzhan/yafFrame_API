@@ -29,7 +29,7 @@ class AttributeModel extends BaseModel {
       getWhereCondition('id', $attributeIds, 'in')
     ];
 
-    $result = $this->getList($where, ['id', 'input_label', 'validate_message', ',default_value', 'input_width', 'column_type', 'column_type', 'column_value', 'notnull', 'column_default', 'commenttxt', 'placeholder']);
+    $result = $this->getList($where, ['id', 'input_label', 'options', 'options_multi_type', 'validate_type', 'validate_message', 'input_type', 'default_value', 'input_width', 'column_type', 'column_type', 'column_value', 'notnull', 'column_default', 'commenttxt', 'placeholder']);
 
     return $result;
   }

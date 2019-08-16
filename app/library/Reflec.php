@@ -52,6 +52,41 @@ class Reflec {
     return $this->_instance->hasMethod($methodname);
   }
 
+
+  public function methodIsPublic($method) {
+
+  }
+
+  /**
+   * @method getMethod
+   * @param $name
+   * 2019/8/11 18:53
+   */
+  public function getMethod($name) {
+    $methods = array_change_value_case($this->getMethods());
+    if (in_array(strtolower($name), $methods)) {
+      return $this->_instance->getMethod($name);
+    } else {
+      return FALSE;
+    }
+  }
+
+  /**
+   * 得到类所有的方法
+   * @method getMethods
+   * @return ReflectionMethod[]
+   * 2019/8/11 18:51
+   */
+  public function getMethods() {
+    $methods = $this->_instance->getMethods();
+
+    $data = [];
+    foreach ($methods as $ref) {
+      $data[] = $ref->name;
+    }
+    return $data;
+  }
+
   public function getAllComment($regular, array $ignore = []) {
     foreach ($this->_instance->getMethods() as $method) {
       if ($ignore && in_array($method->class, $ignore)) continue; //getDeclaringClass

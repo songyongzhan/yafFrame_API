@@ -32,7 +32,28 @@ class AttributeController extends ApiBaseController {
     return $result;
   }
 
+  public function getAllListAction(){
+    $title = $this->_post('title', '');
 
+    $rules = [
+      ['condition' => 'like',
+        'key_field' => ['title'],
+        'db_field' => ['title']
+      ]
+    ];
+    $data = ['title' => $title];
+    $where = $this->where($rules, $this->filterData($data));
+
+    $result = $this->attributeService->getList($where);
+    return $result;
+  }
+
+  /**
+   * @method addAction
+   * @return array
+   * @throws Exception
+   * 2019/7/20 14:14
+   */
   public function addAction() {
     //print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));
     //exit;
@@ -49,7 +70,6 @@ class AttributeController extends ApiBaseController {
     return $result;
   }
 
-
   public function getOneAction() {
     $id = $this->_post('id');
     $result = $this->attributeService->getOne($id);
@@ -59,6 +79,18 @@ class AttributeController extends ApiBaseController {
   public function deleteAction() {
     $id = $this->_post('id');
     $result = $this->attributeService->delete($id);
+    return $result;
+  }
+
+  /**
+   * 用于显示用户属性
+   * @method getAttributeByViewAction
+   * @return array
+   * 2019/7/20 14:14
+   */
+  public function getAttributeByViewAction() {
+    $id = $this->_post('id');
+    $result = $this->attributeService->getAttributeByView($id);
     return $result;
   }
 
