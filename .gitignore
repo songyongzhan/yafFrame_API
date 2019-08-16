@@ -4,6 +4,7 @@
 .idea
 /data/logs
 /data/cache
+/data/
 vendor
 
 #忽略日志文件
